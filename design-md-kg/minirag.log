@@ -1,0 +1,229 @@
+2026-04-06 16:12:34,951 - minirag - INFO - Loaded document status storage with 0 records
+2026-04-06 16:12:34,951 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:12:34,952 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:12:35,211 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:12:36,785 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:12:36,788 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:13:19,321 - minirag - INFO - Inserting 75 vectors to entities
+2026-04-06 16:13:20,875 - minirag - INFO - Inserting 75 vectors to entities
+2026-04-06 16:13:21,805 - minirag - INFO - Inserting 75 vectors to entities_name
+2026-04-06 16:13:23,513 - minirag - INFO - Inserting 75 vectors to relationships
+2026-04-06 16:13:24,666 - minirag - INFO - Writing graph with 76 nodes, 75 edges
+2026-04-06 16:13:24,707 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:13:24,707 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:13:24,715 - minirag - INFO - Inserting 2 vectors to chunks
+2026-04-06 16:13:26,123 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:13:26,132 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:14:04,919 - minirag - INFO - Inserting 76 vectors to entities
+2026-04-06 16:14:06,309 - minirag - INFO - Inserting 76 vectors to entities
+2026-04-06 16:14:07,126 - minirag - INFO - Inserting 76 vectors to entities_name
+2026-04-06 16:14:08,693 - minirag - INFO - Inserting 78 vectors to relationships
+2026-04-06 16:14:09,474 - minirag - INFO - Writing graph with 91 nodes, 102 edges
+2026-04-06 16:14:09,479 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:14:09,480 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:14:09,494 - minirag - INFO - Inserting 6 vectors to chunks
+2026-04-06 16:14:09,851 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:14:09,861 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:14:55,874 - minirag - INFO - Inserting 111 vectors to entities
+2026-04-06 16:14:57,078 - minirag - INFO - Inserting 111 vectors to entities
+2026-04-06 16:14:57,961 - minirag - INFO - Inserting 111 vectors to entities_name
+2026-04-06 16:14:59,073 - minirag - INFO - Inserting 167 vectors to relationships
+2026-04-06 16:15:00,690 - minirag - INFO - Writing graph with 151 nodes, 232 edges
+2026-04-06 16:15:00,699 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:15:00,699 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:15:00,711 - minirag - INFO - Inserting 3 vectors to chunks
+2026-04-06 16:15:01,295 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:15:01,309 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:15:53,502 - minirag - INFO - Inserting 186 vectors to entities
+2026-04-06 16:15:54,651 - minirag - INFO - Inserting 186 vectors to entities
+2026-04-06 16:15:55,869 - minirag - INFO - Inserting 186 vectors to entities_name
+2026-04-06 16:15:57,187 - minirag - INFO - Inserting 339 vectors to relationships
+2026-04-06 16:15:59,242 - minirag - INFO - Writing graph with 217 nodes, 454 edges
+2026-04-06 16:15:59,257 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:15:59,257 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:15:59,270 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:15:59,979 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:15:59,996 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:16:54,929 - minirag - INFO - Inserting 178 vectors to entities
+2026-04-06 16:16:56,316 - minirag - INFO - Inserting 178 vectors to entities
+2026-04-06 16:16:57,548 - minirag - INFO - Inserting 178 vectors to entities_name
+2026-04-06 16:16:58,909 - minirag - INFO - Inserting 287 vectors to relationships
+2026-04-06 16:17:00,685 - minirag - INFO - Writing graph with 276 nodes, 605 edges
+2026-04-06 16:17:00,706 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:17:00,706 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:17:00,719 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:17:01,585 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:17:01,607 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:17:59,863 - minirag - INFO - Inserting 227 vectors to entities
+2026-04-06 16:18:01,727 - minirag - INFO - Inserting 227 vectors to entities
+2026-04-06 16:18:03,299 - minirag - INFO - Inserting 227 vectors to entities_name
+2026-04-06 16:18:04,804 - minirag - INFO - Inserting 353 vectors to relationships
+2026-04-06 16:18:06,833 - minirag - INFO - Writing graph with 337 nodes, 750 edges
+2026-04-06 16:18:06,860 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:18:06,860 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:18:06,876 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:18:07,533 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:18:07,559 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:19:18,207 - minirag - INFO - Inserting 328 vectors to entities
+2026-04-06 16:19:20,234 - minirag - INFO - Inserting 328 vectors to entities
+2026-04-06 16:19:22,156 - minirag - INFO - Inserting 328 vectors to entities_name
+2026-04-06 16:19:24,149 - minirag - INFO - Inserting 508 vectors to relationships
+2026-04-06 16:19:27,177 - minirag - INFO - Writing graph with 442 nodes, 982 edges
+2026-04-06 16:19:27,211 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:19:27,212 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:19:27,221 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:19:28,039 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:19:28,099 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:20:54,141 - minirag - INFO - Inserting 328 vectors to entities
+2026-04-06 16:20:56,446 - minirag - INFO - Inserting 328 vectors to entities
+2026-04-06 16:20:58,450 - minirag - INFO - Inserting 328 vectors to entities_name
+2026-04-06 16:21:00,306 - minirag - INFO - Inserting 534 vectors to relationships
+2026-04-06 16:21:04,110 - minirag - INFO - Writing graph with 513 nodes, 1214 edges
+2026-04-06 16:21:04,288 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:21:04,301 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:21:04,328 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:21:04,763 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:21:04,994 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:22:23,937 - minirag - INFO - Inserting 366 vectors to entities
+2026-04-06 16:22:25,950 - minirag - INFO - Inserting 366 vectors to entities
+2026-04-06 16:22:27,924 - minirag - INFO - Inserting 366 vectors to entities_name
+2026-04-06 16:22:29,956 - minirag - INFO - Inserting 663 vectors to relationships
+2026-04-06 16:22:34,064 - minirag - INFO - Writing graph with 561 nodes, 1411 edges
+2026-04-06 16:22:34,143 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:22:34,145 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:22:34,155 - minirag - INFO - Inserting 2 vectors to chunks
+2026-04-06 16:22:34,879 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:22:34,917 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:24:21,725 - minirag - INFO - Inserting 393 vectors to entities
+2026-04-06 16:24:24,134 - minirag - INFO - Inserting 393 vectors to entities
+2026-04-06 16:24:26,299 - minirag - INFO - Inserting 393 vectors to entities_name
+2026-04-06 16:24:28,386 - minirag - INFO - Inserting 695 vectors to relationships
+2026-04-06 16:24:32,954 - minirag - INFO - Writing graph with 629 nodes, 1645 edges
+2026-04-06 16:24:33,029 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:24:33,030 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:24:33,065 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:24:33,579 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:24:33,615 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:25:55,543 - minirag - INFO - Inserting 417 vectors to entities
+2026-04-06 16:25:57,995 - minirag - INFO - Inserting 417 vectors to entities
+2026-04-06 16:26:00,688 - minirag - INFO - Inserting 417 vectors to entities_name
+2026-04-06 16:26:02,882 - minirag - INFO - Inserting 726 vectors to relationships
+2026-04-06 16:26:08,028 - minirag - INFO - Writing graph with 694 nodes, 1851 edges
+2026-04-06 16:26:08,142 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:26:08,142 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:26:08,154 - minirag - INFO - Inserting 6 vectors to chunks
+2026-04-06 16:26:08,684 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:26:08,727 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:27:45,865 - minirag - INFO - Inserting 493 vectors to entities
+2026-04-06 16:27:48,821 - minirag - INFO - Inserting 493 vectors to entities
+2026-04-06 16:27:51,642 - minirag - INFO - Inserting 493 vectors to entities_name
+2026-04-06 16:27:54,315 - minirag - INFO - Inserting 896 vectors to relationships
+2026-04-06 16:27:59,412 - minirag - INFO - Writing graph with 774 nodes, 2109 edges
+2026-04-06 16:27:59,541 - minirag - INFO - Stored 1 new unique documents
+2026-04-06 16:27:59,544 - minirag - INFO - Number of batches to process: 1
+2026-04-06 16:27:59,557 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:27:59,991 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:28:00,039 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:32:25,517 - minirag - INFO - Loaded document status storage with 13 records
+2026-04-06 16:32:25,517 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:32:25,518 - minirag - INFO - No documents to process
+2026-04-06 16:32:25,824 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:35:44,756 - minirag - INFO - Loaded document status storage with 13 records
+2026-04-06 16:35:44,757 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:35:44,757 - minirag - INFO - No documents to process
+2026-04-06 16:35:45,059 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:36:56,004 - minirag - INFO - Loaded document status storage with 13 records
+2026-04-06 16:36:56,004 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:36:56,005 - minirag - INFO - No documents to process
+2026-04-06 16:36:56,315 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:38:10,725 - minirag - INFO - Loaded document status storage with 13 records
+2026-04-06 16:38:10,726 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:38:10,726 - minirag - INFO - No documents to process
+2026-04-06 16:38:11,032 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:40:13,460 - minirag - INFO - Loaded document status storage with 13 records
+2026-04-06 16:40:13,461 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:40:13,461 - minirag - INFO - No documents to process
+2026-04-06 16:40:13,766 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:42:11,446 - minirag - INFO - Inserting 557 vectors to entities
+2026-04-06 16:42:39,282 - minirag - INFO - Inserting 557 vectors to entities
+2026-04-06 16:42:50,638 - minirag - INFO - Inserting 557 vectors to entities_name
+2026-04-06 16:42:54,945 - minirag - INFO - Inserting 936 vectors to relationships
+2026-04-06 16:43:17,907 - minirag - INFO - Writing graph with 861 nodes, 2394 edges
+2026-04-06 16:43:18,228 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:43:18,228 - minirag - INFO - No documents to process
+2026-04-06 16:43:18,290 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:45:19,123 - minirag - INFO - Inserting 529 vectors to entities
+2026-04-06 16:45:22,960 - minirag - INFO - Inserting 529 vectors to entities
+2026-04-06 16:45:26,217 - minirag - INFO - Inserting 529 vectors to entities_name
+2026-04-06 16:45:29,711 - minirag - INFO - Inserting 853 vectors to relationships
+2026-04-06 16:45:34,918 - minirag - INFO - Writing graph with 890 nodes, 2569 edges
+2026-04-06 16:45:35,042 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:45:35,042 - minirag - INFO - No documents to process
+2026-04-06 16:45:35,111 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:47:33,159 - minirag - INFO - Inserting 467 vectors to entities
+2026-04-06 16:47:35,920 - minirag - INFO - Inserting 467 vectors to entities
+2026-04-06 16:47:38,624 - minirag - INFO - Inserting 467 vectors to entities_name
+2026-04-06 16:47:41,117 - minirag - INFO - Inserting 801 vectors to relationships
+2026-04-06 16:47:45,900 - minirag - INFO - Writing graph with 897 nodes, 2699 edges
+2026-04-06 16:47:46,104 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:47:46,106 - minirag - INFO - No documents to process
+2026-04-06 16:47:46,191 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:49:52,192 - minirag - INFO - Inserting 545 vectors to entities
+2026-04-06 16:49:56,110 - minirag - INFO - Inserting 545 vectors to entities
+2026-04-06 16:49:59,802 - minirag - INFO - Inserting 545 vectors to entities_name
+2026-04-06 16:50:03,306 - minirag - INFO - Inserting 986 vectors to relationships
+2026-04-06 16:50:09,073 - minirag - INFO - Writing graph with 917 nodes, 2861 edges
+2026-04-06 16:50:09,176 - minirag - INFO - No new unique documents were found.
+2026-04-06 16:50:09,176 - minirag - INFO - No documents to process
+2026-04-06 16:50:09,240 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 16:51:45,200 - minirag - INFO - Loaded document status storage with 13 records
+2026-04-06 16:51:45,207 - minirag - INFO - Stored 41 new unique documents
+2026-04-06 16:51:45,207 - minirag - INFO - Number of batches to process: 21
+2026-04-06 16:51:45,471 - minirag - INFO - Inserting 6 vectors to chunks
+2026-04-06 16:51:46,468 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:47,022 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:47,387 - minirag - INFO - Inserting 2 vectors to chunks
+2026-04-06 16:51:47,711 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:48,094 - minirag - INFO - Inserting 6 vectors to chunks
+2026-04-06 16:51:48,484 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:48,870 - minirag - INFO - Inserting 3 vectors to chunks
+2026-04-06 16:51:49,186 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:49,596 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:50,094 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:50,935 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:51,320 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:51,724 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:52,254 - minirag - INFO - Inserting 2 vectors to chunks
+2026-04-06 16:51:52,488 - minirag - INFO - Inserting 6 vectors to chunks
+2026-04-06 16:51:52,880 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:53,570 - minirag - INFO - Inserting 3 vectors to chunks
+2026-04-06 16:51:53,966 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:54,430 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:54,732 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:55,375 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:55,740 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:57,444 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:51:57,849 - minirag - INFO - Inserting 3 vectors to chunks
+2026-04-06 16:51:58,094 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:58,486 - minirag - INFO - Inserting 7 vectors to chunks
+2026-04-06 16:51:59,240 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:51:59,745 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:52:00,187 - minirag - INFO - Inserting 7 vectors to chunks
+2026-04-06 16:52:00,729 - minirag - INFO - Inserting 3 vectors to chunks
+2026-04-06 16:52:01,324 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:52:01,733 - minirag - INFO - Inserting 2 vectors to chunks
+2026-04-06 16:52:02,092 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:52:02,788 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:52:03,506 - minirag - INFO - Inserting 2 vectors to chunks
+2026-04-06 16:52:03,939 - minirag - INFO - Inserting 4 vectors to chunks
+2026-04-06 16:52:04,579 - minirag - INFO - Inserting 6 vectors to chunks
+2026-04-06 16:52:05,123 - minirag - INFO - Inserting 3 vectors to chunks
+2026-04-06 16:52:05,919 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:52:06,485 - minirag - INFO - Inserting 5 vectors to chunks
+2026-04-06 16:52:06,829 - minirag - INFO - Document processing pipeline completed
+2026-04-06 16:52:06,969 - minirag - INFO - Performing entity extraction on newly processed chunks
+2026-04-06 17:09:55,474 - minirag - INFO - Inserting 1358 vectors to entities
+2026-04-06 17:10:05,652 - minirag - INFO - Inserting 1358 vectors to entities
+2026-04-06 17:10:14,033 - minirag - INFO - Inserting 1358 vectors to entities_name
+2026-04-06 17:10:22,485 - minirag - INFO - Inserting 2649 vectors to relationships
+2026-04-06 17:10:39,156 - minirag - INFO - Writing graph with 2019 nodes, 5343 edges

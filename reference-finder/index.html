@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Find a design system reference</title>
+    <meta name="description" content="Describe your product and browse similar design systems from the design-md library." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header" id="refAppHeader">
+        <div class="headerInner">
+          <div class="titleBlock">
+            <div class="kicker">Design library</div>
+            <h1 class="title">Find a reference</h1>
+            <p class="subtitle">Pick a style of product. We’ll show close matches—open a card only when you want detail.</p>
+          </div>
+          <div class="headerActions">
+            <a class="textLinkHeader" href="../analysis/ANALYSIS_FEATURE_TABLE.md" target="_blank" rel="noreferrer">How this list was built</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <aside class="panel rail" aria-label="Search filters">
+          <div class="panelHeader">
+            <div>
+              <div class="panelTitle">Your product</div>
+              <div class="panelHint">Presets + search are enough for most people.</div>
+            </div>
+            <button id="resetBtn" class="btn btnGhost" type="button">Start over</button>
+          </div>
+
+          <div class="field">
+            <div class="label">Start with a preset</div>
+            <div class="chips" id="presetChips">
+              <button class="chipBtn" type="button" data-preset="devtools-docs">Developer tools &amp; docs</button>
+              <button class="chipBtn" type="button" data-preset="saas-dashboard">SaaS / admin app</button>
+              <button class="chipBtn" type="button" data-preset="marketplace-browse">Marketplace or catalog</button>
+              <button class="chipBtn" type="button" data-preset="brand-emotional">Marketing &amp; brand site</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="query">Search (optional)</label>
+            <input id="query" class="input" type="text" placeholder="Words from your product…" autocomplete="off" />
+          </div>
+
+          <div class="filterBlock">
+            <div class="panelMiniTitle">Filters</div>
+            <div class="filterGrid">
+              <div class="filterCell">
+                <label class="label" id="businessModel-label" for="businessModel-trigger">Company type</label>
+                <div class="customSelect" data-custom-select="businessModel">
+                  <input type="hidden" id="businessModel" value="any" autocomplete="off" />
+                  <button type="button" class="customSelectTrigger" id="businessModel-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="businessModel-listbox" aria-labelledby="businessModel-label">
+                    <span class="customSelectValue">Any</span>
+                    <span class="customSelectCaret" aria-hidden="true"></span>
+                  </button>
+                  <ul class="customSelectMenu" id="businessModel-listbox" role="listbox" hidden></ul>
+                </div>
+              </div>
+              <div class="filterCell">
+                <label class="label" id="themeMode-label" for="themeMode-trigger">Light vs dark</label>
+                <div class="customSelect" data-custom-select="themeMode">
+                  <input type="hidden" id="themeMode" value="any" autocomplete="off" />
+                  <button type="button" class="customSelectTrigger" id="themeMode-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeMode-listbox" aria-labelledby="themeMode-label">
+                    <span class="customSelectValue">Any</span>
+                    <span class="customSelectCaret" aria-hidden="true"></span>
+                  </button>
+                  <ul class="customSelectMenu" id="themeMode-listbox" role="listbox" hidden></ul>
+                </div>
+              </div>
+              <div class="filterCell">
+                <label class="label" id="layoutDensity-label" for="layoutDensity-trigger">UI density</label>
+                <div class="customSelect" data-custom-select="layoutDensity">
+                  <input type="hidden" id="layoutDensity" value="any" autocomplete="off" />
+                  <button type="button" class="customSelectTrigger" id="layoutDensity-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="layoutDensity-listbox" aria-labelledby="layoutDensity-label">
+                    <span class="customSelectValue">Any</span>
+                    <span class="customSelectCaret" aria-hidden="true"></span>
+                  </button>
+                  <ul class="customSelectMenu" id="layoutDensity-listbox" role="listbox" hidden></ul>
+                </div>
+              </div>
+              <div class="filterCell">
+                <label class="label" id="contentFocus-label" for="contentFocus-trigger">What’s on screen</label>
+                <div class="customSelect" data-custom-select="contentFocus">
+                  <input type="hidden" id="contentFocus" value="any" autocomplete="off" />
+                  <button type="button" class="customSelectTrigger" id="contentFocus-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="contentFocus-listbox" aria-labelledby="contentFocus-label">
+                    <span class="customSelectValue">Any</span>
+                    <span class="customSelectCaret" aria-hidden="true"></span>
+                  </button>
+                  <ul class="customSelectMenu" id="contentFocus-listbox" role="listbox" hidden></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="label" id="goalLabel">Goal</div>
+            <div class="chips chipsTight" id="intentPresets" role="group" aria-labelledby="goalLabel">
+              <button class="chipBtn chipBtnSm" type="button" data-intent="trust" aria-pressed="false">Trust</button>
+              <button class="chipBtn chipBtnSm" type="button" data-intent="exploration" aria-pressed="false">Discovery</button>
+              <button class="chipBtn chipBtnSm" type="button" data-intent="emotional" aria-pressed="false">Brand feel</button>
+              <button class="chipBtn chipBtnSm" type="button" data-intent="balanced" aria-pressed="true">Balanced</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="results feed">
+          <div class="resultsHeader">
+            <div>
+              <div class="panelTitle">Matches</div>
+              <div class="panelHint">
+                <span id="matchCount">—</span> shown · closest first
+              </div>
+              <div class="resultsSubline" id="updateStatus" aria-live="polite"></div>
+            </div>
+            <div class="resultsRight">
+              <span class="resultsMeta" id="dataStatus">Loading…</span>
+            </div>
+          </div>
+
+          <div id="resultsList" class="cards"></div>
+
+          <footer class="footer">
+            <details class="disclosure disclosureFooter">
+              <summary class="disclosureSummary disclosureSummaryMuted">Running on your computer</summary>
+              <div class="disclosureBody">
+                <p class="footerNote">Use a local server from the project folder, then open the URL below.</p>
+                <code class="footerCode">python3 -m http.server 8000</code>
+                <p class="footerNote"><span class="mono">http://localhost:8000/reference-finder/</span></p>
+                <a class="textLinkFooter" href="../analysis/features.json" target="_blank" rel="noreferrer">Raw data (JSON)</a>
+              </div>
+            </details>
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
+

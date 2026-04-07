@@ -1,0 +1,124 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-04-07",
+  "companyKey": "slug",
+  "features": [
+    {
+      "key": "productType",
+      "group": "company",
+      "type": "enum",
+      "allowed": ["physical", "digital", "marketplace", "mixed", "unknown"],
+      "definition": "Primary product nature of the company.",
+      "decisionRule": "Use marketplace if the UI is primarily about browsing a catalog of third-party offerings; physical if centered on a manufactured product; digital otherwise."
+    },
+    {
+      "key": "businessModel",
+      "group": "company",
+      "type": "enum",
+      "allowed": ["saas", "devtools", "fintech", "ai", "marketplace", "ecommerce", "social", "media", "other", "unknown"],
+      "definition": "Business model / category for analysis (refined to reduce overuse of other).",
+      "decisionRule": "Prefer saas/devtools/fintech/ai when clearly signaled by the doc and product framing; otherwise use marketplace/ecommerce/social/media; fall back to other/unknown only if unclear."
+    },
+    {
+      "key": "uxMode",
+      "group": "company",
+      "type": "enum",
+      "allowed": ["browsingHeavy", "taskFocused", "creationTool", "docsHeavy", "mixed", "unknown"],
+      "definition": "Dominant UX mode implied by layout + component patterns.",
+      "decisionRule": "browsingHeavy for feeds/grids of items; taskFocused for workflows/actions; creationTool for editors/canvases; docsHeavy for documentation-style density."
+    },
+    {
+      "key": "imageryUsage",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["imageFirst", "mixed", "textFirst", "unknown"],
+      "definition": "How central imagery is to the interface and layout hierarchy.",
+      "decisionRule": "imageFirst when key UI sections are structured around photography/illustration; textFirst when content is mostly typography/components; mixed otherwise."
+    },
+    {
+      "key": "colorStrategy",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["singleAccent", "multiAccent", "gradientLed", "monochrome", "unknown"],
+      "definition": "How the system uses color at the semantic/brand level.",
+      "decisionRule": "singleAccent for mostly neutrals plus one primary; multiAccent for several distinct roles/brands; gradientLed when gradients are core; monochrome for near-black/white only."
+    },
+    {
+      "key": "typographyTone",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["neutral", "expressive", "technical", "premium", "unknown"],
+      "definition": "Dominant typographic character.",
+      "decisionRule": "technical when monospace or code-like styling is prominent; premium when display typography + spacing are luxury-coded; expressive when brand voice is strongly stylized; neutral otherwise."
+    },
+    {
+      "key": "layoutDensity",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["sparse", "balanced", "dense", "unknown"],
+      "definition": "Information density and whitespace philosophy.",
+      "decisionRule": "dense for dashboards/docs with tight spacing; sparse for showroom-like layouts; balanced for typical SaaS marketing/UI."
+    },
+    {
+      "key": "surfaceDepth",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["flat", "subtle", "layered", "unknown"],
+      "definition": "Elevation/shadow usage and surface hierarchy.",
+      "decisionRule": "flat when shadows are avoided and borders/opacity do the work; subtle for minimal shadows; layered for multi-depth stacks and heavy elevation language."
+    },
+    {
+      "key": "themeMode",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["darkFirst", "lightFirst", "dual", "unknown"],
+      "definition": "Whether the design system is dark-first, light-first, or explicitly dual-mode.",
+      "decisionRule": "darkFirst if the doc describes dark surfaces as the primary identity; lightFirst if it defaults to light surfaces; dual if both are first-class."
+    },
+    {
+      "key": "shapeLanguage",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["pill", "rounded", "sharp", "mixed", "unknown"],
+      "definition": "Dominant geometry for components (corners, pills, chips).",
+      "decisionRule": "pill if 999px/pill shapes dominate; rounded if consistent radii without full pills; sharp if corners are mostly tight/rectilinear; mixed if multiple strong geometries."
+    },
+    {
+      "key": "shadowStyle",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["none", "subtle", "stacked", "ring", "unknown"],
+      "definition": "How depth is expressed through shadow/ring/border techniques.",
+      "decisionRule": "none if shadows are avoided; subtle if minimal single shadows; stacked if multi-layer shadow stacks are a signature; ring if inner/outer rings replace conventional shadows."
+    },
+    {
+      "key": "contentFocus",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["codeFirst", "productScreenshots", "photography", "illustration", "mixed", "unknown"],
+      "definition": "Primary visual/content payload emphasized in the system's examples and patterns.",
+      "decisionRule": "codeFirst for code blocks/terminal aesthetics; productScreenshots for UI-as-hero; photography for editorial/real imagery; illustration for illustrative systems; mixed otherwise."
+    },
+    {
+      "key": "motionUsage",
+      "group": "designSystem",
+      "type": "enum",
+      "allowed": ["low", "medium", "high", "unknown"],
+      "definition": "How much motion/animation is part of the system.",
+      "decisionRule": "Use what the doc explicitly describes; unknown if not mentioned."
+    },
+    {
+      "key": "primaryIntent",
+      "group": "outcomes",
+      "type": "enum",
+      "allowed": ["trust", "exploration", "speed", "conversion", "emotionalBranding", "unknown"],
+      "definition": "Hypothesized dominant intent of the design system.",
+      "decisionRule": "Infer only if multiple signals point the same way; otherwise unknown."
+    }
+  ],
+  "notesField": {
+    "key": "notes",
+    "definition": "Single free-text field for nuance/caveats (more robust than a one-liner; keep readable)."
+  }
+}
+

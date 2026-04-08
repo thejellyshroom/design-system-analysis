@@ -66,18 +66,21 @@ export function renderCard ({ row, score, parts, selected }) {
 
   const tags = pickTags(f).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')
   const previewFolder = previewFolderFromRow(row)
-  const sourceBlobUrl = designMdGithubBlobUrl(path)
+  const readmePath = path
+    ? String(path).replace(/DESIGN\.md$/i, 'README.md')
+    : (previewFolder ? `design-md/${previewFolder}/README.md` : '')
+  const sourceBlobUrl = designMdGithubBlobUrl(readmePath)
   const scoreTitle = buildScoreTooltip(score)
 
-  const sourceSection = path && sourceBlobUrl
+  const sourceSection = readmePath && sourceBlobUrl
     ? `<div class="cardSection">
-      <div class="cardSectionTitle">Source file</div>
-      <a class="previewExternalLink cardSourceLink" href="${escapeHtml(sourceBlobUrl)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(path)} on GitHub">
-        <span class="previewExternalText">${escapeHtml(path)}</span>${EXTERNAL_ICON_SVG}
+      <div class="cardSectionTitle">Source file (README)</div>
+      <a class="previewExternalLink cardSourceLink" href="${escapeHtml(sourceBlobUrl)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(readmePath)} on GitHub">
+        <span class="previewExternalText">${escapeHtml(readmePath)}</span>${EXTERNAL_ICON_SVG}
       </a>
     </div>`
     : `<div class="cardSection">
-      <div class="cardSectionTitle">Source file</div>
+      <div class="cardSectionTitle">Source file (README)</div>
       <p class="cardSourceMissing">No path in data for this row.</p>
     </div>`
 

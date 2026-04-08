@@ -18,7 +18,7 @@ Fork of **[awesome-design-md](https://github.com/VoltAgent/awesome-design-md)** 
 | **Narrative + evidence model** | [ANALYSIS.md](ANALYSIS.md) — patterns across companies (`[Table]`, `[KG]`, `[Hypothesis]`). |
 | **Distributions, cross-tabs, traceability** | [analysis/ANALYSIS_FEATURE_TABLE.md](analysis/ANALYSIS_FEATURE_TABLE.md) — companion to the story doc. |
 | **Structured feature data** | [analysis/features.json](analysis/features.json) (source of truth), [analysis/features.schema.json](analysis/features.schema.json), [analysis/features.csv](analysis/features.csv). |
-| **Reference finder** | [reference-finder/](reference-finder/) — static UI: filters, goals, keywords, previews from `design-md/`. |
+| **Reference finder** | [reference-finder/](reference-finder/) — static UI: filters, goals, keywords, previews from `design-md/`. **Live:** [design-md-finder.vercel.app/reference-finder/](https://design-md-finder.vercel.app/reference-finder/). |
 | **Scripts** | [scripts/](scripts/) — e.g. `extract_feature_table.py` to align buckets and refresh enums. |
 
 The **`design-md/`** directory keeps the same **Stitch-style `DESIGN.md` + previews** as upstream: copy any folder’s `DESIGN.md` into a project and point an agent at it. This fork adds **taxonomy** (`collectionBucket`, theme, geometry, depth, payload, intent) and **documentation** built on top of that table.
@@ -28,6 +28,8 @@ The **`design-md/`** directory keeps the same **Stitch-style `DESIGN.md` + previ
 ---
 
 ## Reference finder (quick start)
+
+**Live demo:** [https://design-md-finder.vercel.app/reference-finder/](https://design-md-finder.vercel.app/reference-finder/)
 
 Serve the **repository root** (paths are relative to `analysis/features.json` and `design-md/`):
 
@@ -48,7 +50,7 @@ The reference finder uses **relative URLs** to `../analysis/features.json` and `
 5. **Build Command:** leave **empty** (static files only).
 6. **Output Directory:** leave **empty** — Vercel serves the repo root as static assets.
 
-[`vercel.json`](vercel.json) redirects `/` → `/reference-finder/`. Your app will live at `https://<project>.vercel.app/reference-finder/`.
+[`vercel.json`](vercel.json) redirects `/` → `/reference-finder/`. This project is deployed at [design-md-finder.vercel.app/reference-finder/](https://design-md-finder.vercel.app/reference-finder/); your own fork will be at `https://<project>.vercel.app/reference-finder/`.
 
 Optional: [`.vercelignore`](.vercelignore) skips heavy paths (`MiniRAG/`, `design-md-kg/`, etc.) so uploads stay smaller. Edit or delete it if you need those files online.
 

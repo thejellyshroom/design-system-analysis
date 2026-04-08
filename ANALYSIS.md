@@ -257,6 +257,73 @@ Only **seven** rows use `colorStrategy=gradientLed`, and they span **Design & Pr
 
 ---
 
+### 15) Design craft signals the knowledge graph surfaces (beyond the feature table)
+
+The LightRAG graph aggregates many `DESIGN.md` chunks into shared entities. That merging is lossy for attribution (see §16), but it also makes **repeated craft decisions** visible: the same *kinds* of sections and micro-rules show up again and again across unrelated companies.
+
+**A convergent outline for “public marketing site” specs.** Distinct documents independently elevate the same *document architecture*: **Touch Targets** (minimum tap sizes, full-width mobile CTAs, spacing for links and pills), **Collapsing Strategy** (how hero, nav, grids, and colorful sections compress across breakpoints), **Image Behavior** (lazy loading, full-bleed heroes, preserving corner radius when scaling), and **Breakpoints** as a named responsive framework. That pattern is stronger in the KG than ad-hoc component catalogs—it reads like an emerging **Stitch-style checklist** for agent-ready marketing pages, not only a visual style guide.
+
+> *[KG → Touch Targets] "minimum tappable dimensions and spacing … CTAs, navigation links, media controls, and pill buttons"*
+> *[KG → Collapsing Strategy] "how headlines, grids, navigation, hero modules, section backgrounds, and images adapt across screen sizes"*
+
+**Several incompatible “depth grammars,” all explicit.** Merged **Shadow Philosophy** / **Depth & Elevation** descriptions encode genuinely different strategies: **almost no shadows**—depth from borders, opacity shifts, and photography (e.g. Warp’s marketing framing in the graph); **void-black canvases** where conventional drop shadows read wrong, so **frost or ring borders** imply lift; **warm ring halos** and **multi-layer card shadows** for tactile marketplaces; **flat planes + overlays** for trust-forward fintech (aligned with §3). The graph’s pile of contradictions is the insight: teams are not “choosing shadow vs flat” at random—they are picking **which physics metaphor** matches their background (white gallery, black void, terminal dense).
+
+> *[KG → Shadow Philosophy] "almost no shadows, instead relying on borders, opacity shifts, and photography to create depth"*
+> *[KG → Shadow Philosophy] "traditional shadows are ineffective on a pure black background … frost borders … floating glass-like depth"*
+> *[KG → Depth & Elevation] "elevation should remain minimal and rely on ring shadows and pastel surface contrast rather than heavy shadows"*
+
+**Micro-typography and interaction details are named principles, not afterthoughts.** The graph repeatedly extracts **Negative Tracking on Headings** as its own rule—tight letter-spacing for an “intimate” display voice. **Variable Font Precision** appears as a principle: continuous interpolation exists, but the *system* commits to **discrete weight stops** so implementation stays predictable. **Tab Navigation** is documented down to mechanism—e.g. **active state via inset box-shadow underlines** rather than a bottom border—showing how far teams go to keep chrome visually quiet.
+
+> *[KG → Negative Tracking on Headings] "slightly negative letter spacing on headings to create an intimate and cozy tone"*
+> *[KG → Variable Font Precision] "continuous interpolation while the system uses discrete weight stops"*
+> *[KG → Tab Navigation] "active or hover states expressed via inset box-shadow underlines rather than border-bottom"*
+
+**Perceptual color spaces show up in prose tokens.** Descriptions cite **oklab**-based borders and low-opacity “warm brown” neutrals—borders defined for **perceptual consistency across backgrounds**, not just hex pairs. That is a design insight for cross-functional teams: the spec is written so **engineering’s color space** and **design’s “organic edge”** are the same sentence.
+
+> *[KG → Border Primary] "standard border … 10% warm brown in oklab space"*
+> *[KG → Tab Navigation] "bottom border of 1px solid oklab(0.263 / 0.1)"*
+
+**Dual-register typography on technical brands.** The merged graph often pairs a **monospace / code** role (e.g. Geist Mono, commitMono) with a separate **editorial or display** role—e.g. **GT Alpina** for “editorial moments,” or principle text that contrasts **serif authority** with **sans utility**. The pattern is a **magazine voice + terminal voice** on the same surface: credibility through monospace, warmth or sophistication through a second family used sparingly.
+
+> *[KG → Editorial] "GT Alpina for selective editorial moments requiring warmth and elegance"*
+> *[KG → Principles] "serif authority, sans utility, and readability choices"*
+
+**“Whitespace” is framed as pacing, not emptiness.** **Whitespace Philosophy** nodes describe **photography as whitespace**, **chapter-like** section breaks, **content islands** on void backgrounds, and contrast between dense and sparse bands. That matches the table’s browsing-heavy marketing skew (§12) but adds *rhetoric*: negative space is doing **narrative rhythm**, not just layout grid math.
+
+> *[KG → Whitespace Philosophy] "generous spacing … photography as visual whitespace, and editorial pacing"*
+> *[KG → Whitespace Philosophy] "chapter-like section separation … readability"*
+
+- **Evidence**:
+  - **[KG]**: entity descriptions and hubs above in `design-md-kg/graph_data.json` (and the GraphML export); relationship keywords skew heavily toward typography, responsive layout, and tokens (§16).
+  - **[Table]**: complements `shadowStyle`, `themeMode`, and `uxMode` enums—graph text explains *how* teams justify those choices in long-form specs.
+  - **[Hypothesis]**: shared section names reflect **awesome-design-md / Stitch norms** and mutual imitation as much as independent convergence.
+
+---
+
+### 16) The LightRAG graph is a distorted lens—useful if you read its seams
+
+The chunk–entity–relation graph in `design-md-kg/graph_chunk_entity_relation.graphml` (mirrored in `design-md-kg/graph_data.json`, ~2k nodes) was built for retrieval, not as a clean ontology. Several **non-obvious** behaviors show up only when you scan the merged graph—not when you read a single company’s `DESIGN.md`.
+
+**Entity types are extraction artifacts, not a semantic schema.** The extractor had a small set of labels (mostly ORGANIZATION, EVENT, LOCATION). In practice, **named colors** can appear as LOCATION when the prose ties them to a street-address origin story; **font families** sometimes appear as ORGANIZATION; **document sections** (“Breakpoints”, “Decorative Depth”) appear as EVENT; **screen regions** (hero, category pill bar) appear as LOCATION. Treat `entity_type` as bookkeeping from the NER pass, not as “what this thing is” in a design information model.
+
+**Brand narrative and automated audit text are fused in the same node descriptions.** The Airbnb organization node’s description repeatedly embeds **“61 detected breakpoints”** next to marketing language—that pattern comes from **layout-analysis output** being summarized into the same entity string as hand-written spec tone. A generic **“Breakpoints”** hub node similarly carries a variant mentioning **“26 detected breakpoints.”** The graph does **not** separate provenance: measurement-like claims and normative rules sit in one blob. For agents, that is a **QA risk** if quoted as author intent without chunk traceability.
+
+**“Agent Prompt Guide” is a first-class hub, not a footnote.** The graph includes an explicit **Agent Prompt Guide** entity whose merged descriptions reference structured prompting, color references, component examples, and iteration rules—spanning multiple companies’ docs (including Apple- and Airbnb-aligned wording in the same aggregated node). That matches the Stitch-style idea that **LLM-facing instructions are structural peers of tokens and type**, not an appendix.
+
+**Generic names collapse many brands into synthetic archetypes.** Nodes such as **Hero Section**, **Breakpoints**, and **Decorative Depth** accumulate **dozens of incompatible descriptions** from different sites (e.g. one hero on pure white with a given display font, another on a loud gradient, another on void black). The graph then behaves as if there were a single cross-industry object. That is good for noticing **genre conventions** (“everyone documents a hero and a breakpoint table”) and poor for **attribution** unless you follow `source_id` / chunk IDs back to one `DESIGN.md`.
+
+**Relationship vocabulary skews toward typography and responsive scaffolding.** Aggregated edge keywords emphasize typography roles, hierarchy, font stacks, brand identity, responsive layout, and color tokens—**not** motion systems, illustration pipelines, or content workflows. The KG over-represents **how rules are named and wired** relative to other design dimensions; absence in the graph is not evidence of absence in the product.
+
+**Sub-brand tiers show up as dense parallel entity clusters.** Marketplace-style specs spawn sibling nodes for offerings and their colors (e.g. premium tiers and **magenta / purple** accents). In edge count and description volume, **brand architecture** can look as “heavy” as **component anatomy**—a niche signal that some `DESIGN.md` files are doing as much **SKU- and tier-story work** as UI pattern work.
+
+**PERSON is rare and mixed.** Only a handful of PERSON nodes appear across the whole graph; they include real names, role buckets, mascots, and invoked taste references (e.g. **Dieter Rams**). The type is **not** a reliable people index—it marks **where the prose personifies or cites humans**.
+
+- **Evidence**:
+  - **[KG]**: entity-type distribution and merged descriptions in `design-md-kg/graph_data.json` / `graph_chunk_entity_relation.graphml`; hub entities **Agent Prompt Guide**, **Breakpoints**, **Hero Section**, **Decorative Depth** (cross-brand description stacks); Airbnb node text citing detected breakpoint counts.
+  - **[Hypothesis]**: collapsing entities improves recall for RAG but **blurs brand-specific claims**; consumers should prefer chunk-grounded answers over raw node summaries.
+
+---
+
 ### Summary: a few “big levers” explain most first impressions
 
 If you want a fast, re-usable vocabulary that works for both designers and engineers, start with these levers (all captured in the feature table):

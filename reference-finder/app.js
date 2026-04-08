@@ -19,31 +19,48 @@ const INTENT_BUCKET = {
   unknown: 'unknown'
 }
 
+/** Display titles for `features.collectionBucket` */
+const COLLECTION_BUCKET_LABEL = {
+  aiAndMachineLearning: 'AI & Machine Learning',
+  developerToolsAndPlatforms: 'Developer Tools & Platforms',
+  infrastructureAndCloud: 'Infrastructure & Cloud',
+  designAndProductivity: 'Design & Productivity',
+  fintechAndCrypto: 'Fintech & Crypto',
+  enterpriseAndConsumer: 'Enterprise & Consumer'
+}
+
 const SELECT_KEYS = [
-  'businessModel',
+  'collectionBucket',
   'themeMode',
   'layoutDensity',
   'contentFocus'
 ]
 
 const ENUM_FIX = {
-  saas: 'SaaS',
-  ai: 'AI',
   api: 'API',
-  devtools: 'Dev tools',
-  fintech: 'Fintech',
-  ecommerce: 'E-commerce',
   unknown: 'Not specified'
 }
 
 const FEATURE_SHORT_LABEL = {
-  businessModel: 'Company',
+  collectionBucket: 'Category',
   uxMode: 'UX style',
   themeMode: 'Theme',
   layoutDensity: 'Density',
   shadowStyle: 'Depth',
   contentFocus: 'On-screen',
   primaryIntent: 'Focus'
+}
+
+function filterFieldLabel (key) {
+  return FEATURE_SHORT_LABEL[key] || key
+}
+
+/** Human-readable value for filter keys. */
+function formatFilterDisplayValue (key, v) {
+  if (!v || v === 'unknown') return 'Not specified'
+  if (key === 'collectionBucket') return COLLECTION_BUCKET_LABEL[v] || prettyEnumValue(v)
+  if (key === 'primaryIntent') return prettyPrimaryIntent(v)
+  return prettyEnumValue(v)
 }
 
 const INTENT_READABLE = {
@@ -57,6 +74,7 @@ const INTENT_READABLE = {
 
 function prettyEnumValue (v) {
   if (!v) return ''
+  if (COLLECTION_BUCKET_LABEL[v]) return COLLECTION_BUCKET_LABEL[v]
   if (ENUM_FIX[v]) return ENUM_FIX[v]
   return v
     .replace(/([a-z])([A-Z])/g, '$1 $2')
@@ -141,10 +159,16 @@ function computeTextMatch (query, row) {
   const q = String(query || '').trim().toLowerCase()
   if (!q) return 0
 
+  const bucket = row?.features?.collectionBucket
+  const bucketSearchLine = bucket
+    ? `${bucket} ${COLLECTION_BUCKET_LABEL[bucket] || ''}`
+    : ''
+
   const hay = [
     row?.company?.name,
     row?.company?.slug,
     row?.source?.designMdPath,
+    bucketSearchLine,
     row?.notes
   ]
     .filter(Boolean)
@@ -359,7 +383,7 @@ function attachCustomFilterHandlers (panelEl, onChange) {
 }
 
 function pickTags (rowFeatures) {
-  const keys = ['businessModel', 'uxMode', 'themeMode', 'layoutDensity', 'shadowStyle', 'contentFocus', 'primaryIntent']
+  const keys = ['collectionBucket', 'uxMode', 'themeMode', 'layoutDensity', 'shadowStyle', 'contentFocus', 'primaryIntent']
   const out = []
   for (const k of keys) {
     const v = rowFeatures?.[k]
@@ -377,6 +401,14 @@ function guessSlugFromRow (row) {
   const p = row?.source?.designMdPath || ''
   const m = p.match(/^design-md\/([^/]+)\//)
   return m?.[1] || ''
+}
+
+/** Folder name under design-md/ (may differ from marketing slug, e.g. linear.app). */
+function previewFolderFromRow (row) {
+  const p = String(row?.source?.designMdPath || '')
+  const m = p.match(/^design-md\/([^/]+)\//)
+  if (m) return m[1]
+  return row?.company?.slug || ''
 }
 
 function buildPreviewLink (slug, file) {
@@ -418,27 +450,69 @@ function parseDirectoryListingForPreviews (html) {
   return Array.from(new Set(matches)).sort((a, b) => a.localeCompare(b))
 }
 
-async function discoverPreviews (slug) {
-  if (!slug) return []
-  if (previewCache.has(slug)) return previewCache.get(slug)
-  if (previewInFlight.has(slug)) return previewInFlight.get(slug)
+/** Also match Apache/nginx-style listings (href='file'). */
+function parseDirectoryListingForPreviewsLoose (html) {
+  const matches = []
+  const re = /href=(["'])([^"']+\.html)\1/gi
+  let m
+  while ((m = re.exec(html))) {
+    let name = m[2] || ''
+    if (!name || name.includes('/')) continue
+    try {
+      name = decodeURIComponent(name)
+    } catch {}
+    name = name.replaceAll('%20', ' ')
+    if (!/^preview.*\.html$/i.test(name)) continue
+    matches.push(name)
+  }
+  return Array.from(new Set(matches)).sort((a, b) => a.localeCompare(b))
+}
+
+async function probePreviewFile (folder, filename) {
+  const url = `../design-md/${encodeURIComponent(folder)}/${encodeURIComponent(filename)}`
+  try {
+    const res = await fetch(url, { method: 'GET', cache: 'no-store' })
+    return res.ok
+  } catch {
+    return false
+  }
+}
+
+async function discoverPreviews (folder) {
+  if (!folder) return []
+  if (previewCache.has(folder)) return previewCache.get(folder)
+  if (previewInFlight.has(folder)) return previewInFlight.get(folder)
 
   const p = (async () => {
     try {
-      const res = await fetch(`../design-md/${encodeURIComponent(slug)}/`, { cache: 'no-store' })
-      if (!res.ok) return []
-      const html = await res.text()
-      const previews = parseDirectoryListingForPreviews(html)
-      previewCache.set(slug, previews)
+      const res = await fetch(`../design-md/${encodeURIComponent(folder)}/`, { cache: 'no-store' })
+      let previews = []
+      if (res.ok) {
+        const html = await res.text()
+        previews = parseDirectoryListingForPreviews(html)
+        if (previews.length === 0) {
+          previews = parseDirectoryListingForPreviewsLoose(html)
+        }
+      }
+      if (previews.length === 0) {
+        const candidates = ['preview.html', 'preview-dark.html']
+        const found = []
+        for (const f of candidates) {
+          if (await probePreviewFile(folder, f)) found.push(f)
+        }
+        previews = found.sort((a, b) => a.localeCompare(b))
+      }
+      previewCache.set(folder, previews)
       return previews
     } catch {
+      previewCache.set(folder, [])
       return []
     } finally {
-      previewInFlight.delete(slug)
+      previewInFlight.delete(folder)
     }
   })()
 
-  previewInFlight.set(slug, p)
+  previewInFlight.set(folder, p)
   return p
 }
 
@@ -449,9 +523,6 @@ function buildScoreTooltip (score, parts, primaryIntentReadable) {
   const keywordPct = (parts.text * 100).toFixed(0)
   return (
     `Match score ${total} (0–100). Higher = closer to what you asked for. ` +
-    `Weighted mix: 70% filter overlap (${filterPct}% on this row), ` +
-    `20% goal fit (${goalPct}%; this system’s focus: ${primaryIntentReadable}), ` +
-    `10% search keywords (${keywordPct}% overlap with your search). ` +
     `For ordering only—not a grade of design quality.`
   )
 }
@@ -467,14 +538,19 @@ function renderCard ({ row, score, parts, selected }) {
 
   const matchBits = []
   for (const m of parts.hard.matches) {
-    matchBits.push(`<strong>${escapeHtml(m.key)}</strong> = ${escapeHtml(m.actual)}`)
+    const label = filterFieldLabel(m.key)
+    const shown = formatFilterDisplayValue(m.key, m.actual)
+    matchBits.push(`<strong>${escapeHtml(label)}</strong> = ${escapeHtml(shown)}`)
   }
   for (const key of Object.keys(selected)) {
     const hasAnyMatch = parts.hard.matches.some(m => m.key === key)
     if (hasAnyMatch) continue
     const desired = selected[key]
     const actual = f?.[key] ?? 'unknown'
-    matchBits.push(`<strong>${escapeHtml(key)}</strong> ≠ ${escapeHtml(desired)} (is ${escapeHtml(actual)})`)
+    const label = filterFieldLabel(key)
+    matchBits.push(
+      `<strong>${escapeHtml(label)}</strong> wanted ${escapeHtml(formatFilterDisplayValue(key, desired))} · this row is ${escapeHtml(formatFilterDisplayValue(key, actual))}`
+    )
   }
 
   const why = [
@@ -484,7 +560,7 @@ function renderCard ({ row, score, parts, selected }) {
   ].join(' · ')
 
   const tags = pickTags(f).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')
-  const previewSlug = guessSlugFromRow(row)
+  const previewFolder = previewFolderFromRow(row)
   const sourceBlobUrl = designMdGithubBlobUrl(path)
   const scoreTitle = buildScoreTooltip(
     score,
@@ -518,7 +594,7 @@ function renderCard ({ row, score, parts, selected }) {
     </div>
     <div class="cardSection">
       <div class="cardSectionTitle">Sample</div>
-      <div class="previewGrid" data-preview-root="${escapeHtml(previewSlug)}" data-preview-mount="1">
+      <div class="previewGrid" data-preview-root="${escapeHtml(previewFolder)}" data-preview-mount="1">
         <span class="previewEmpty">Loading…</span>
       </div>
     </div>
@@ -530,6 +606,9 @@ function renderCard ({ row, score, parts, selected }) {
     <details class="cardDisclosure">
       <summary class="cardDisclosureSummary">Why it’s near the top</summary>
       <div class="why whyFlush">${why}</div>
+      ${matchBits.length
+    ? `<ul class="whyMatchList">${matchBits.map((b) => `<li>${b}</li>`).join('')}</ul>`
+    : ''}
     </details>
   </article>
   `
@@ -568,7 +647,7 @@ function computeRanking ({ rows, state }) {
 function bind () {
   const els = {
     query: document.getElementById('query'),
-    businessModel: document.getElementById('businessModel'),
+    collectionBucket: document.getElementById('collectionBucket'),
     themeMode: document.getElementById('themeMode'),
     layoutDensity: document.getElementById('layoutDensity'),
     contentFocus: document.getElementById('contentFocus'),
@@ -587,7 +666,7 @@ function bind () {
 function readState (els, intentRaw) {
   return {
     query: els.query.value,
-    businessModel: els.businessModel.value,
+    collectionBucket: els.collectionBucket.value,
     themeMode: els.themeMode.value,
     layoutDensity: els.layoutDensity.value,
     contentFocus: els.contentFocus.value,
@@ -617,7 +696,7 @@ function wire (els, rows) {
 
   const resetPanel = () => {
     els.query.value = ''
-    els.businessModel.value = 'any'
+    els.collectionBucket.value = 'any'
     els.themeMode.value = 'any'
     els.layoutDensity.value = 'any'
     els.contentFocus.value = 'any'
@@ -656,8 +735,8 @@ function wire (els, rows) {
   }
 
   const applyPreset = (preset) => {
-    if (preset === 'devtools-docs') {
-      els.businessModel.value = 'devtools'
+    if (preset === 'devtools-docs' || preset === 'developer-tools-platforms') {
+      els.collectionBucket.value = 'developerToolsAndPlatforms'
       els.contentFocus.value = 'codeFirst'
       els.layoutDensity.value = 'dense'
       els.themeMode.value = 'dual'
@@ -665,17 +744,44 @@ function wire (els, rows) {
       els.query.value = 'docs code api developer'
       return
     }
-    if (preset === 'saas-dashboard') {
-      els.businessModel.value = 'saas'
+    if (preset === 'ai-machine-learning') {
+      els.collectionBucket.value = 'aiAndMachineLearning'
+      els.contentFocus.value = 'mixed'
+      els.layoutDensity.value = 'balanced'
+      els.themeMode.value = 'any'
+      setIntentPreset('balanced')
+      els.query.value = 'llm model inference api agent'
+      return
+    }
+    if (preset === 'infrastructure-cloud') {
+      els.collectionBucket.value = 'infrastructureAndCloud'
+      els.contentFocus.value = 'codeFirst'
+      els.layoutDensity.value = 'dense'
+      els.themeMode.value = 'darkFirst'
+      setIntentPreset('trust')
+      els.query.value = 'cloud database infrastructure api'
+      return
+    }
+    if (preset === 'fintech-crypto') {
+      els.collectionBucket.value = 'fintechAndCrypto'
+      els.contentFocus.value = 'productScreenshots'
+      els.layoutDensity.value = 'balanced'
+      els.themeMode.value = 'any'
+      setIntentPreset('trust')
+      els.query.value = 'banking money payment wallet'
+      return
+    }
+    if (preset === 'design-productivity') {
+      els.collectionBucket.value = 'designAndProductivity'
       els.layoutDensity.value = 'dense'
       els.contentFocus.value = 'productScreenshots'
       els.themeMode.value = 'dual'
       setIntentPreset('trust')
-      els.query.value = 'dashboard settings tables'
+      els.query.value = 'dashboard workspace canvas'
       return
     }
     if (preset === 'marketplace-browse') {
-      els.businessModel.value = 'marketplace'
+      els.collectionBucket.value = 'enterpriseAndConsumer'
       els.layoutDensity.value = 'balanced'
       els.contentFocus.value = 'photography'
       els.themeMode.value = 'lightFirst'
@@ -684,7 +790,7 @@ function wire (els, rows) {
       return
     }
     if (preset === 'brand-emotional') {
-      els.businessModel.value = 'other'
+      els.collectionBucket.value = 'enterpriseAndConsumer'
       els.layoutDensity.value = 'sparse'
       els.contentFocus.value = 'mixed'
       els.themeMode.value = 'lightFirst'
@@ -724,7 +830,7 @@ function wire (els, rows) {
           const toolbar = hasBoth
             ? `
             <div class="previewToolbar">
-              <span class="previewToolbarLabel">Sample look</span>
+              <span class="previewToolbarLabel">Sample</span>
               <div class="previewThemeSeg" role="group" aria-label="Light or dark sample">
                 <button type="button" class="previewThemeBtn isActive" data-preview-theme="light" aria-pressed="true">Light</button>
                 <button type="button" class="previewThemeBtn" data-preview-theme="dark" aria-pressed="false">Dark</button>
@@ -881,15 +987,22 @@ async function main () {
     const rows = Array.isArray(data?.rows) ? data.rows : []
     if (rows.length === 0) throw new Error('features.json has no rows')
 
-    const models = uniqSorted(rows.map(r => r?.features?.businessModel))
+    const buckets = uniqSorted(rows.map(r => r?.features?.collectionBucket))
     const themeModes = uniqSorted(rows.map(r => r?.features?.themeMode))
     const densities = uniqSorted(rows.map(r => r?.features?.layoutDensity))
     const contentFocuses = uniqSorted(rows.map(r => r?.features?.contentFocus))
 
     populateCustomFilter({
-      inputEl: els.businessModel,
-      options: models,
-      preferredOrder: ['devtools', 'saas', 'ai', 'fintech', 'marketplace', 'ecommerce', 'media', 'social', 'other', 'unknown']
+      inputEl: els.collectionBucket,
+      options: buckets,
+      preferredOrder: [
+        'aiAndMachineLearning',
+        'developerToolsAndPlatforms',
+        'infrastructureAndCloud',
+        'designAndProductivity',
+        'fintechAndCrypto',
+        'enterpriseAndConsumer'
+      ]
     })
     populateCustomFilter({
       inputEl: els.themeMode,

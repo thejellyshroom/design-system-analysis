@@ -17,7 +17,7 @@
           <div class="titleBlock">
             <div class="kicker">Design library</div>
             <h1 class="title">Find a reference</h1>
-            <p class="subtitle">Pick a style of product. We’ll show close matches—open a card only when you want detail.</p>
+            <p class="subtitle">Pick a product style. We’ll rank close matches—open a card only when you want detail.</p>
           </div>
           <div class="headerActions">
             <a class="textLinkHeader" href="../analysis/ANALYSIS_FEATURE_TABLE.md" target="_blank" rel="noreferrer">How this list was built</a>
@@ -37,11 +37,14 @@
 
           <div class="field">
             <div class="label">Start with a preset</div>
-            <div class="chips" id="presetChips">
-              <button class="chipBtn" type="button" data-preset="devtools-docs">Developer tools &amp; docs</button>
-              <button class="chipBtn" type="button" data-preset="saas-dashboard">SaaS / admin app</button>
-              <button class="chipBtn" type="button" data-preset="marketplace-browse">Marketplace or catalog</button>
-              <button class="chipBtn" type="button" data-preset="brand-emotional">Marketing &amp; brand site</button>
+            <div class="chips chipsPresets" id="presetChips">
+              <button class="chipBtn" type="button" data-preset="developer-tools-platforms">Developer tools &amp; platforms</button>
+              <button class="chipBtn" type="button" data-preset="design-productivity">Design &amp; productivity</button>
+              <button class="chipBtn" type="button" data-preset="ai-machine-learning">AI &amp; machine learning</button>
+              <button class="chipBtn" type="button" data-preset="infrastructure-cloud">Infrastructure &amp; cloud</button>
+              <button class="chipBtn" type="button" data-preset="fintech-crypto">Fintech &amp; crypto</button>
+              <button class="chipBtn" type="button" data-preset="marketplace-browse">Enterprise · catalog browse</button>
+              <button class="chipBtn" type="button" data-preset="brand-emotional">Enterprise · brand story</button>
             </div>
           </div>
 
@@ -54,14 +57,14 @@
             <div class="panelMiniTitle">Filters</div>
             <div class="filterGrid">
               <div class="filterCell">
-                <label class="label" id="businessModel-label" for="businessModel-trigger">Company type</label>
-                <div class="customSelect" data-custom-select="businessModel">
-                  <input type="hidden" id="businessModel" value="any" autocomplete="off" />
-                  <button type="button" class="customSelectTrigger" id="businessModel-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="businessModel-listbox" aria-labelledby="businessModel-label">
+                <label class="label" id="collectionBucket-label" for="collectionBucket-trigger">Category</label>
+                <div class="customSelect" data-custom-select="collectionBucket">
+                  <input type="hidden" id="collectionBucket" value="any" autocomplete="off" />
+                  <button type="button" class="customSelectTrigger" id="collectionBucket-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="collectionBucket-listbox" aria-labelledby="collectionBucket-label">
                     <span class="customSelectValue">Any</span>
                     <span class="customSelectCaret" aria-hidden="true"></span>
                   </button>
-                  <ul class="customSelectMenu" id="businessModel-listbox" role="listbox" hidden></ul>
+                  <ul class="customSelectMenu" id="collectionBucket-listbox" role="listbox" hidden></ul>
                 </div>
               </div>
               <div class="filterCell">

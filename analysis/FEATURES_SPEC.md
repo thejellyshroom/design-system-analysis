@@ -23,7 +23,7 @@ Each company row in `analysis/features.json` follows this shape:
 - `company.slug` (string): folder name under `design-md/` (e.g. `airbnb`, `mistral.ai`)
 - `company.name` (string): display name (can equal slug capitalization)
 - `source.designMdPath` (string): `design-md/<slug>/DESIGN.md`
-- `features` (object): keys defined in `features.schema.json` with enum values
+- `features` (object): keys defined in `features.schema.json` with enum values (including `collectionBucket`: README **Collection** section per company)
 - `notes` (string): single free-text field (robust; still keep readable)
 
 ## Allowed values

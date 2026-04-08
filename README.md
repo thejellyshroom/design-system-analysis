@@ -7,7 +7,7 @@
 <br/>
 
 <div align="center">
-    <strong>Curated collection of DESIGN.md files inspired by developer focused websites.</strong>
+    <strong>Curated collection of DESIGN.md files inspired by developer-focused websites, plus cross-company design-system analysis.</strong>
     <br />
     <br />
 
@@ -72,6 +72,33 @@ Each site includes:
 
 1. Copy a site's `DESIGN.md` into your project root
 2. Tell your AI agent to use it.
+
+
+## Design system analysis
+
+This repo includes a **quantitative and narrative analysis** of the collection: shared vocabulary for “why does this feel like *that*?”—not rankings, prescriptions, or claims of causality.
+
+| Doc | What it is |
+|-----|------------|
+| [ANALYSIS.md](ANALYSIS.md) | **Story layer**: stable insights, KG-backed quotes where available, segment cheat-sheet, and an explicit evidence model (`[Table]`, `[KG]`, `[Hypothesis]`). |
+| [analysis/ANALYSIS_FEATURE_TABLE.md](analysis/ANALYSIS_FEATURE_TABLE.md) | **Table companion**: feature semantics, distributions and cross-tabs over `features.json`, limitations, and a traceability index from each headline in `ANALYSIS.md` to measurable evidence. |
+
+**Data (source of truth for the table)**
+
+- [`analysis/features.json`](analysis/features.json) — one row per company (54 in the current snapshot): enums such as `collectionBucket` (README **Collection** section), `themeMode`, `shapeLanguage`, `shadowStyle`, `contentFocus`, `primaryIntent`, plus notes.
+- [`analysis/clusters.csv`](analysis/clusters.csv) — KMeans clusters on one-hot encoded enum features (exploratory; the companion doc treats rule-based `collectionBucket` slices—the README Collection sections—as the primary segmentation).
+
+**Big levers** (called out in both docs): mood (`themeMode`), geometry (`shapeLanguage`), depth language (`shadowStyle`), and payload (`contentFocus`).
+
+**Reference finder** — static UI to explore close matches from the feature data. Serve the **repository root** (the app loads `analysis/features.json` and `design-md/` via relative URLs), then open `/reference-finder/`:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then visit `http://localhost:8000/reference-finder/`.
+
+**Scripts** (optional): `scripts/extract_feature_table.py` and related tooling under `scripts/` for regenerating or extending the feature table.
 
 
 ## Request a DESIGN.md

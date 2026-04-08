@@ -86,7 +86,7 @@ Revolut is explicit about this: cards use "flat styling, no shadows" across both
 **What this achieves:** Visual simplicity as a proxy for operational simplicity. This is especially important for products where users are anxious about where their money is and what is happening to it.
 
 - **Evidence**:
-  - **[Table]**: fintech is a first-class segment in the table; see companion segment summaries and “big levers.”
+  - **[Table]**: `fintechAndCrypto` is a defined bucket (4 companies: Coinbase, Kraken, Revolut, Wise; Stripe is under Infrastructure); see companion segment summaries and “big levers.”
   - **[KG]**: Revolut/Coinbase snippets above.
   - **[Hypothesis]**: flatness → perceived transparency (interpretation, not a measured outcome).
 
@@ -126,7 +126,7 @@ This is not minimalism for its own sake. It is mimicry of the terminal and the I
 **What this achieves:** Immediate context-setting. A developer opening a new tool reads the color scheme before reading any copy. Monochrome + neon says "professional, technical, no hand-holding."
 
 - **Evidence**:
-  - **[Table]**: devtools segment shows mixed `themeMode` but a meaningful dark-first share (see companion cross-tabs).
+  - **[Table]**: Developer Tools & Platforms (`developerToolsAndPlatforms`) shows mixed `themeMode` but a meaningful dark-first share (see companion cross-tabs).
   - **[KG]**: Vercel snippets above.
   - **[Hypothesis]**: “IDE/terminal mimicry” as credibility.
 
@@ -245,4 +245,4 @@ For distributions, segment cross-tabs, and a claim-by-claim traceability index, 
 | Fintech | Custom (typography-led) | 1-2 brand colors, neutral everything else | Flat, border-defined | Typography + flatness = trust |
 | Developer tools | Monospace as identity | Near-monochrome + neon accent | Dark, information-dense | Monochrome + density = credibility |
 | AI product | Display-heavy | Dark, minimal, 1 accent | Dark surfaces, light type | Dark + typography = intelligence |
-| Productivity/SaaS | System fonts or near-neutral | Moderate, user-content-friendly | Light, neutral, minimal shadow | Disappearing interface |
+| Design & productivity | System fonts or near-neutral | Moderate, user-content-friendly | Light, neutral, minimal shadow | Disappearing interface |

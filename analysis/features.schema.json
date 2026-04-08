@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updatedAt": "2026-04-07",
   "companyKey": "slug",
   "features": [
@@ -12,12 +12,20 @@
       "decisionRule": "Use marketplace if the UI is primarily about browsing a catalog of third-party offerings; physical if centered on a manufactured product; digital otherwise."
     },
     {
-      "key": "businessModel",
+      "key": "collectionBucket",
       "group": "company",
       "type": "enum",
-      "allowed": ["saas", "devtools", "fintech", "ai", "marketplace", "ecommerce", "social", "media", "other", "unknown"],
-      "definition": "Business model / category for analysis (refined to reduce overuse of other).",
-      "decisionRule": "Prefer saas/devtools/fintech/ai when clearly signaled by the doc and product framing; otherwise use marketplace/ecommerce/social/media; fall back to other/unknown only if unclear."
+      "allowed": [
+        "aiAndMachineLearning",
+        "developerToolsAndPlatforms",
+        "infrastructureAndCloud",
+        "designAndProductivity",
+        "fintechAndCrypto",
+        "enterpriseAndConsumer",
+        "unknown"
+      ],
+      "definition": "README Collection section for this company (same headings as the repo README).",
+      "decisionRule": "Assign exactly one bucket per company using the README Collection groupings (AI & Machine Learning; Developer Tools & Platforms; Infrastructure & Cloud; Design & Productivity; Fintech & Crypto; Enterprise & Consumer). Stripe is listed under Infrastructure & Cloud in the README. New companies should be added to README + `scripts/extract_feature_table.py` README_COLLECTION_BUCKET_BY_SLUG; use unknown only as a temporary placeholder."
     },
     {
       "key": "uxMode",

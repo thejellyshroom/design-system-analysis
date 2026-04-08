@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updatedAt": "2026-04-07",
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "rows": [
     {
       "company": {
@@ -13,7 +13,7 @@
       },
       "features": {
         "productType": "marketplace",
-        "businessModel": "marketplace",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -39,7 +39,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -65,7 +65,7 @@
       },
       "features": {
         "productType": "physical",
-        "businessModel": "ecommerce",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -91,7 +91,7 @@
       },
       "features": {
         "productType": "physical",
-        "businessModel": "other",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -117,9 +117,9 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "taskFocused",
-        "imageryUsage": "unknown",
+        "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
         "typographyTone": "technical",
         "layoutDensity": "balanced",
@@ -143,7 +143,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -169,7 +169,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -195,7 +195,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "infrastructureAndCloud",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -204,7 +204,7 @@
         "surfaceDepth": "layered",
         "themeMode": "darkFirst",
         "shapeLanguage": "sharp",
-        "shadowStyle": "unknown",
+        "shadowStyle": "subtle",
         "contentFocus": "codeFirst",
         "motionUsage": "low",
         "primaryIntent": "trust"
@@ -221,7 +221,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -247,7 +247,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "fintech",
+        "collectionBucket": "fintechAndCrypto",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -273,7 +273,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "infrastructureAndCloud",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -282,7 +282,7 @@
         "surfaceDepth": "layered",
         "themeMode": "darkFirst",
         "shapeLanguage": "sharp",
-        "shadowStyle": "unknown",
+        "shadowStyle": "subtle",
         "contentFocus": "codeFirst",
         "motionUsage": "low",
         "primaryIntent": "trust"
@@ -299,7 +299,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "creationTool",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -325,7 +325,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -334,7 +334,7 @@
         "surfaceDepth": "layered",
         "themeMode": "lightFirst",
         "shapeLanguage": "pill",
-        "shadowStyle": "unknown",
+        "shadowStyle": "stacked",
         "contentFocus": "mixed",
         "motionUsage": "low",
         "primaryIntent": "emotionalBranding"
@@ -351,7 +351,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "monochrome",
@@ -377,7 +377,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "creationTool",
         "imageryUsage": "mixed",
         "colorStrategy": "gradientLed",
@@ -403,7 +403,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "creationTool",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -428,8 +428,8 @@
         "designMdPath": "design-md/hashicorp/DESIGN.md"
       },
       "features": {
-        "productType": "mixed",
-        "businessModel": "devtools",
+        "productType": "digital",
+        "collectionBucket": "infrastructureAndCloud",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -455,7 +455,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "other",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -481,7 +481,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -507,7 +507,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "fintech",
+        "collectionBucket": "fintechAndCrypto",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -525,15 +525,15 @@
     },
     {
       "company": {
-        "slug": "linear",
+        "slug": "linear.app",
         "name": "Linear"
       },
       "source": {
-        "designMdPath": "design-md/linear/DESIGN.md"
+        "designMdPath": "design-md/linear.app/DESIGN.md"
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -559,7 +559,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -585,7 +585,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -611,7 +611,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "docsHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "gradientLed",
@@ -637,7 +637,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -663,7 +663,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "gradientLed",
@@ -689,7 +689,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "infrastructureAndCloud",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -715,7 +715,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -741,7 +741,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "other",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -767,9 +767,9 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "browsingHeavy",
-        "imageryUsage": "unknown",
+        "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
         "typographyTone": "neutral",
         "layoutDensity": "sparse",
@@ -793,7 +793,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -819,7 +819,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "social",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -845,7 +845,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -871,7 +871,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -897,7 +897,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "gradientLed",
@@ -923,7 +923,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "creationTool",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -949,7 +949,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "fintech",
+        "collectionBucket": "fintechAndCrypto",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -975,7 +975,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -1001,7 +1001,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "infrastructureAndCloud",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -1027,7 +1027,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -1053,7 +1053,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "other",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "monochrome",
@@ -1062,7 +1062,7 @@
         "surfaceDepth": "flat",
         "themeMode": "darkFirst",
         "shapeLanguage": "sharp",
-        "shadowStyle": "unknown",
+        "shadowStyle": "none",
         "contentFocus": "photography",
         "motionUsage": "low",
         "primaryIntent": "emotionalBranding"
@@ -1079,7 +1079,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "media",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
@@ -1090,8 +1090,8 @@
         "shapeLanguage": "pill",
         "shadowStyle": "stacked",
         "contentFocus": "productScreenshots",
-        "motionUsage": "unknown",
-        "primaryIntent": "unknown"
+        "motionUsage": "medium",
+        "primaryIntent": "exploration"
       },
       "notes": "Spotify's design exudes a dark, immersive vibe, utilizing a near-black color palette that enhances the visibility of album art and content. The primary accent, Spotify Green, is used functionally rather than decoratively, creating a striking contrast against the achromatic UI. Typography is compact and expressive, featuring proprietary fonts that support multiple global scripts, ensuring accessibility. The layout is dense, with tightly packed content that prioritizes user engagement over whitespace. The dark theme is complemented by rounded shapes, particularly in buttons and controls, which are designed for touch interaction. Content is primarily presented through product screenshots, emphasizing the music and podcast experience. Overall, the design feels premium and tactile, inviting users into a rich auditory environment."
     },
@@ -1105,7 +1105,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "fintech",
+        "collectionBucket": "infrastructureAndCloud",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -1131,7 +1131,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -1157,7 +1157,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "gradientLed",
@@ -1183,7 +1183,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "mixed",
         "imageryUsage": "mixed",
         "colorStrategy": "gradientLed",
@@ -1209,7 +1209,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "marketplace",
+        "collectionBucket": "enterpriseAndConsumer",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -1235,7 +1235,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -1261,7 +1261,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",
@@ -1287,7 +1287,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "devtools",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "creationTool",
         "imageryUsage": "mixed",
         "colorStrategy": "monochrome",
@@ -1313,7 +1313,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "designAndProductivity",
         "uxMode": "creationTool",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -1339,7 +1339,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "fintech",
+        "collectionBucket": "fintechAndCrypto",
         "uxMode": "browsingHeavy",
         "imageryUsage": "mixed",
         "colorStrategy": "multiAccent",
@@ -1365,7 +1365,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "ai",
+        "collectionBucket": "aiAndMachineLearning",
         "uxMode": "browsingHeavy",
         "imageryUsage": "textFirst",
         "colorStrategy": "monochrome",
@@ -1391,7 +1391,7 @@
       },
       "features": {
         "productType": "digital",
-        "businessModel": "saas",
+        "collectionBucket": "developerToolsAndPlatforms",
         "uxMode": "taskFocused",
         "imageryUsage": "mixed",
         "colorStrategy": "singleAccent",

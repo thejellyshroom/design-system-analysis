@@ -32,6 +32,40 @@ SCHEMA_PATH = REPO_ROOT / 'analysis' / 'features.schema.json'
 OUT_PATH = REPO_ROOT / 'analysis' / 'features.json'
 DESIGN_MD_ROOT = REPO_ROOT / 'design-md'
 
+# Canonical README.md ## Collection grouping (do not let the LLM override).
+_AI = 'aiAndMachineLearning'
+_DEV = 'developerToolsAndPlatforms'
+_INFRA = 'infrastructureAndCloud'
+_DESIGN = 'designAndProductivity'
+_FINTECH = 'fintechAndCrypto'
+_ENT = 'enterpriseAndConsumer'
+
+README_COLLECTION_BUCKET_BY_SLUG: dict[str, str] = {
+    'claude': _AI, 'cohere': _AI, 'elevenlabs': _AI, 'minimax': _AI, 'mistral.ai': _AI,
+    'ollama': _AI, 'opencode.ai': _AI, 'replicate': _AI, 'runwayml': _AI, 'together.ai': _AI,
+    'voltagent': _AI, 'x.ai': _AI,
+    'cursor': _DEV, 'expo': _DEV, 'linear.app': _DEV, 'lovable': _DEV, 'mintlify': _DEV,
+    'posthog': _DEV, 'raycast': _DEV, 'resend': _DEV, 'sentry': _DEV, 'supabase': _DEV,
+    'superhuman': _DEV, 'vercel': _DEV, 'warp': _DEV, 'zapier': _DEV,
+    'clickhouse': _INFRA, 'composio': _INFRA, 'hashicorp': _INFRA, 'mongodb': _INFRA,
+    'sanity': _INFRA, 'stripe': _INFRA,
+    'airtable': _DESIGN, 'cal': _DESIGN, 'clay': _DESIGN, 'figma': _DESIGN, 'framer': _DESIGN,
+    'intercom': _DESIGN, 'miro': _DESIGN, 'notion': _DESIGN, 'pinterest': _DESIGN, 'webflow': _DESIGN,
+    'coinbase': _FINTECH, 'kraken': _FINTECH, 'revolut': _FINTECH, 'wise': _FINTECH,
+    'airbnb': _ENT, 'apple': _ENT, 'bmw': _ENT, 'ibm': _ENT, 'nvidia': _ENT, 'spacex': _ENT,
+    'spotify': _ENT, 'uber': _ENT,
+}
+
+
+def apply_readme_collection_bucket(row: dict) -> dict:
+  slug = (row.get('company') or {}).get('slug')
+  if not slug:
+    return row
+  bucket = README_COLLECTION_BUCKET_BY_SLUG.get(slug)
+  if bucket:
+    row.setdefault('features', {})['collectionBucket'] = bucket
+  return row
+
 
 def load_schema() -> dict:
   return json.loads(SCHEMA_PATH.read_text(encoding='utf-8'))
@@ -246,7 +280,7 @@ async def extract_one(client, model: str, schema: dict, doc: dict, sem: asyncio.
   row = validate_row(schema, row)
   row['company']['slug'] = doc['slug']
   row['source']['designMdPath'] = f"design-md/{doc['slug']}/DESIGN.md"
-  return row
+  return apply_readme_collection_bucket(row)
 
 
 async def extract_only_fields(client, model: str, schema: dict, doc: dict, keys: list[str], sem: asyncio.Semaphore) -> dict:
@@ -299,12 +333,12 @@ async def main_async(limit: int, only: str | None, force: bool) -> None:
   sem = asyncio.Semaphore(max_async)
 
   # Refresh keys: allows recomputing specific fields without full --force.
-  # Also auto-refresh businessModel when schema version changes (common refinement).
+  # Also auto-refresh collectionBucket when schema version changes (common refinement).
   refresh_keys_raw = os.getenv('FEATURE_TABLE_REFRESH_KEYS', '')
   refresh_keys = [k.strip() for k in refresh_keys_raw.split(',') if k.strip()]
   if existing.get('schemaVersion') != schema.get('version'):
-    if 'businessModel' not in refresh_keys and 'businessModel' in schema_keys:
-      refresh_keys.append('businessModel')
+    if 'collectionBucket' not in refresh_keys and 'collectionBucket' in schema_keys:
+      refresh_keys.append('collectionBucket')
 
   tasks = []
   patch_plan: dict[str, list[str]] = {}
@@ -334,7 +368,10 @@ async def main_async(limit: int, only: str | None, force: bool) -> None:
       'version': existing.get('version', schema.get('version', '1.0.0')),
       'updatedAt': '2026-04-07',
       'schemaVersion': schema.get('version', ''),
-      'rows': [existing_rows[k] for k in sorted(existing_rows.keys())]
+      'rows': [
+        apply_readme_collection_bucket(validate_row(schema, existing_rows[k]))
+        for k in sorted(existing_rows.keys())
+      ]
     }
     write_rows(out, schema=schema)
     print('Nothing to do (no missing/refresh fields). Wrote pruned rows + schemaVersion metadata.')
@@ -360,13 +397,16 @@ async def main_async(limit: int, only: str | None, force: bool) -> None:
     for k, v in (patch or {}).items():
       row_features[k] = v
     row['features'] = row_features
-    existing_rows[slug] = validate_row(schema, row)
+    existing_rows[slug] = apply_readme_collection_bucket(validate_row(schema, row))
 
   out = {
     'version': existing.get('version', schema.get('version', '1.0.0')),
     'updatedAt': '2026-04-07',
     'schemaVersion': schema.get('version', ''),
-    'rows': [existing_rows[k] for k in sorted(existing_rows.keys())]
+    'rows': [
+      apply_readme_collection_bucket(validate_row(schema, existing_rows[k]))
+      for k in sorted(existing_rows.keys())
+    ]
   }
   write_rows(out, schema=schema)
   print(f"Wrote {OUT_PATH} ({len(out['rows'])} rows total)")

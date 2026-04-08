@@ -1,0 +1,6 @@
+# Speed up / shrink deploys — optional; remove lines if you need these on the CDN
+MiniRAG
+design-md-kg
+**/.git
+**/__pycache__
+**/*.pyc

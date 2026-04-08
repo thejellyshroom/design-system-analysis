@@ -37,6 +37,21 @@ python3 -m http.server 8000
 
 Open **http://localhost:8000/reference-finder/** — use **Category** (collection bucket), optional filters, goals, search, and card previews where `preview.html` / `preview-dark.html` exist.
 
+### Deploy on Vercel
+
+The reference finder uses **relative URLs** to `../analysis/features.json` and `../design-md/…`, so Vercel must publish the **repository root** (not only `reference-finder/`).
+
+1. Push this repo to GitHub (or connect your existing fork).
+2. In [Vercel](https://vercel.com/new): **Add New Project** → import the repo.
+3. **Framework Preset:** Other (or “No framework”).
+4. **Root Directory:** `.` (leave default).
+5. **Build Command:** leave **empty** (static files only).
+6. **Output Directory:** leave **empty** — Vercel serves the repo root as static assets.
+
+[`vercel.json`](vercel.json) redirects `/` → `/reference-finder/`. Your app will live at `https://<project>.vercel.app/reference-finder/`.
+
+Optional: [`.vercelignore`](.vercelignore) skips heavy paths (`MiniRAG/`, `design-md-kg/`, etc.) so uploads stay smaller. Edit or delete it if you need those files online.
+
 ---
 
 ## Analysis docs (quick start)

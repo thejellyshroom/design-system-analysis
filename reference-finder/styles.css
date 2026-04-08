@@ -162,6 +162,26 @@ a { color: inherit; text-decoration: none; }
   color: var(--accent-hover);
 }
 
+.headerLinkSep {
+  color: var(--muted2);
+  font-weight: 600;
+  user-select: none;
+}
+
+.footerRepoLine {
+  margin-top: 12px;
+}
+
+.textLinkFooterInline {
+  margin-top: 0;
+  display: inline;
+}
+
+.footerLinkSep {
+  color: var(--muted2);
+  margin: 0 0.35em;
+}
+
 .textLinkFooter {
   display: inline-block;
   margin-top: 10px;

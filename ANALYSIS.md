@@ -2,7 +2,7 @@
 
 Public synthesis of cross-company design-system patterns, intended for **designers** and **engineers** who want a fast, evidence-grounded vocabulary for “why does this feel like *that*?”
 
-- **Companion (methods + evidence)**: `analysis/ANALYSIS_FEATURE_TABLE.md`
+- **Companion (methods + evidence)**: `analysis/ANALYSIS_FEATURE_TABLE.md` (includes extended cross-tabs under “Further table-derived analyses”)
 - **Data**: `analysis/features.json` (manual enums + notes, 58 companies)
 - **Extra context**: LightRAG knowledge graph (KG) extracted from design-system source material
 
@@ -225,6 +225,38 @@ The presence of a Do's/Don'ts section is a signal about who the design system au
 
 ---
 
+### 12) Most sites in the table read as browsing-heavy marketing, not task shells
+
+Even when the product is a developer tool, database, or model API, the **labeled UX mode** skews toward **browsing-heavy** layouts: long scroll, hero + sections, grids of cards—more showroom than application chrome.
+
+**What this achieves:** a comparable “genre” across categories: the first touch is usually discovery and narrative, not dense workflow UI (which would show up more as `taskFocused` or `creationTool`).
+
+- **Evidence**:
+  - **[Table]**: `uxMode=browsingHeavy` is **25/58**; `taskFocused` **12/58**; `creationTool` **6/58** (see companion “Further table-derived analyses §A”).
+  - **[Hypothesis]**: the feature table is biased toward **public marketing** pages rather than signed-in product surfaces.
+
+---
+
+### 13) “Flat dark” shows up across unrelated buckets
+
+A non-trivial subset of companies pair **dark-first** surfaces with **no** emphasized shadow system (`shadowStyle=none`). The set mixes AI, dev tooling, fintech, CMS, and automotive—suggesting a **shared flat-dark canvas** tactic (depth from type, color, or imagery—not stacked elevation).
+
+- **Evidence**:
+  - **[Table]**: `themeMode=darkFirst` ∧ `shadowStyle=none` → **10/58** (companion §G lists slugs).
+  - **[Hypothesis]**: psychological “premium terminal” or “cinematic void” readings depend on category context; the table only shows co-occurrence.
+
+---
+
+### 14) Gradient-led color is rare and not owned by one collection
+
+Only **seven** rows use `colorStrategy=gradientLed`, and they span **Design & Productivity**, **Developer Tools**, **AI**, and **Automotive**. Gradients here function as a **brand or hero accent strategy**, not as a marker of a single README section.
+
+- **Evidence**:
+  - **[Table]**: seven named companies in companion “Further table-derived analyses §F.”
+  - **[Hypothesis]**: *why* a team chooses gradients (energy, futurism, aurora heroes) is category-specific even when the enum is the same.
+
+---
+
 ### Summary: a few “big levers” explain most first impressions
 
 If you want a fast, re-usable vocabulary that works for both designers and engineers, start with these levers (all captured in the feature table):
@@ -246,3 +278,4 @@ For distributions, segment cross-tabs, and a claim-by-claim traceability index, 
 | Developer tools | Monospace as identity | Near-monochrome + neon accent | Dark, information-dense | Monochrome + density = credibility |
 | AI product | Display-heavy | Dark, minimal, 1 accent | Dark surfaces, light type | Dark + typography = intelligence |
 | Design & productivity | System fonts or near-neutral | Moderate, user-content-friendly | Light, neutral, minimal shadow | Disappearing interface |
+| Automotive (OEM) | Proprietary sans families | Single / multi / gradient heroes | Dual or dark-first, often flat or stacked | Product + brand theater |

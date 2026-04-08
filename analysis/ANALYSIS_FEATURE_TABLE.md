@@ -68,6 +68,8 @@ pie showData
 - **primaryIntent**: mostly `trust` (40), with `exploration` (9) and `emotionalBranding` (9).  
   Implication: your decision rule is still “trust-seeking.” If you want more variation, tighten the rule for `trust` and/or bias toward `unknown` unless multiple independent cues align.
 
+  **Full `emotionalBranding` set (9):** Claude, Clay, ElevenLabs, Ferrari, Lamborghini, Lovable, Mistral AI, Runway, SpaceX.
+
 ---
 
 ## Overview
@@ -134,7 +136,7 @@ flowchart LR
 
 ### 5) “Exploration” and “emotional branding” are real minority strategies here
 
-**Exploration examples:** Airbnb, Figma, Miro, Kraken, Renault (by `primaryIntent`, not by collection bucket)  
+**Exploration examples:** Airbnb, Figma, Minimax, Miro, Pinterest, PostHog, Replicate, Renault, Spotify (by `primaryIntent`, not by collection bucket; fintech rows such as Kraken are `trust` in the table)  
 **EmotionalBranding examples:** Claude, Clay, Runway, Ferrari, Lamborghini
 
 These groups are smaller (9/58 and 9/58), but they’re important because they represent brands that prioritize either:
@@ -200,6 +202,77 @@ The table shows strong specialization:
 - **fintechAndCrypto**: `productScreenshots` **2/4**, `codeFirst` **1/4**, `illustration` **1/4**
 
 **What this suggests:** “code payload vs UI payload vs editorial payload” explains more of the perceived differences than most other single columns.
+
+---
+
+## Further table-derived analyses (58-company snapshot)
+
+Additional slices that are easy to recompute from `features.json` and useful for segmentation or sanity checks.
+
+### A) `uxMode` — browsing vs task vs build
+
+| Value | Count |
+|-------|------:|
+| `browsingHeavy` | 25 |
+| `mixed` | 14 |
+| `taskFocused` | 12 |
+| `creationTool` | 6 |
+| `docsHeavy` | 1 |
+
+**Implication:** the majority of rows read as **marketing / catalog / editorial scroll** surfaces, even when the underlying product is a dev tool or AI API. Task-focused and creation-tool modes are minorities—useful when comparing “homepage” vs “app shell” extracts.
+
+### B) `imageryUsage` — “mixed” swamps the rest
+
+| Value | Count |
+|-------|------:|
+| `mixed` | 44 |
+| `imageFirst` | 13 |
+| `textFirst` | 1 |
+
+**Implication:** only a thin slice is unambiguously **image-first** in the enum sense; most brands blend photography, UI shots, and type. Claims about “photography-led” brands should lean on `contentFocus` and notes, not `imageryUsage` alone.
+
+### C) `surfaceDepth` and `motionUsage`
+
+**`surfaceDepth`:** `flat` 30, `layered` 22, `subtle` 6 — the collection skews toward **flat or lightly stacked** surfaces rather than heavy elevation systems.
+
+**`motionUsage`:** `low` 30 vs `medium` 28 — almost **even split**; motion is not a strong separator in this table (no `high` labels in the current snapshot).
+
+### D) `primaryIntent` × `contentFocus` (full grid)
+
+Rows = `primaryIntent`, columns = `contentFocus` (counts):
+
+|  | codeFirst | illustration | mixed | photography | productScreenshots |
+|--|----------:|-------------:|------:|-------------:|-------------------:|
+| **trust** | 13 | 4 | 9 | 3 | 11 |
+| **exploration** | 0 | 3 | 1 | 3 | 2 |
+| **emotionalBranding** | 0 | 2 | 3 | 4 | 0 |
+
+**Implication:** `trust` is the only intent with **code-first** rows (and it owns all 13). **Exploration** never appears with `codeFirst` in this snapshot. **Emotional branding** shows up across illustration, mixed, and **photography** (4 rows: Ferrari, Mistral AI, Runway, SpaceX)—not only “illustration brands.”
+
+### E) Automotive vs enterprise (consumer) — same table, different lever profile
+
+Comparing `collectionBucket=automotiveAndMobility` (**5**) with `enterpriseAndConsumer` (**7**):
+
+| Lever | Automotive (5) | Enterprise & consumer (7) |
+|-------|----------------|----------------------------|
+| `shapeLanguage` | `mixed` **4**, `sharp` 1 | `pill` 3, `sharp` 3, `rounded` 1 |
+| `shadowStyle` | `none` **3**, `subtle` 1, `stacked` 1 | `subtle` 3, `none` 2, `stacked` 2 |
+| `colorStrategy` | `singleAccent` 2, `multiAccent` 2, `gradientLed` 1 | `singleAccent` 5, `monochrome` 2 |
+| `themeMode` | `dual` **3**, `darkFirst` 1, `lightFirst` 1 | `darkFirst` 4, `dual` 2, `lightFirst` 1 |
+
+**Implication:** OEM rows skew **dual theme**, **mixed geometry** (pill search fields, modal radii, etc.), and **shadow-none** surfaces more than the enterprise bucket, which skews **pill** shapes and **single-accent / monochrome** color strategies. Both are still small-*n* cohorts—treat as directional.
+
+### F) `colorStrategy=gradientLed` is rare and cross-bucket
+
+**7 / 58** rows: Figma, Mintlify, Mistral AI, Replicate, Renault, Superhuman, Together AI (spans `designAndProductivity`, `developerToolsAndPlatforms`, `aiAndMachineLearning`, and `automotiveAndMobility`).
+
+**Implication:** gradient-led marketing is **not** owned by one README collection; it is a deliberate accent strategy that shows up in dev docs brands, AI homepages, and Renault-style hero treatment alike.
+
+### G) Co-occurrence: “flat dark” (`darkFirst` + `shadowStyle=none`)
+
+**10 / 58** rows share **dark-first** theme and **no** shadow token emphasis: Lamborghini, OpenCode AI, Replicate, Revolut, Runway, Sanity, SpaceX, Supabase, Warp, x.ai.
+
+**Implication:** a recognizable **flat dark canvas** pattern crosses fintech, AI, infrastructure, and automotive—depth comes from type, color, or imagery rather than elevation stacks.
 
 ---
 
@@ -279,3 +352,18 @@ Legend:
 
 - **Primary**: **[KG]** presence of explicit constraint language.
 - **Status**: correlation framing is **[Hypothesis]** until a table column explicitly encodes “dos/donts section present.”
+
+### Insight 12 (UX mode → browsing-heavy marketing envelope)
+
+- **[Table]**: `uxMode` distribution — `browsingHeavy` **25/58** vs `taskFocused` **12/58** vs `creationTool` **6/58** (see “Further table-derived analyses §A”).
+- **Status**: descriptive; “why marketing pages converge” is **[Hypothesis]**.
+
+### Insight 13 (flat dark canvas co-occurrence)
+
+- **[Table]**: `themeMode=darkFirst` ∧ `shadowStyle=none` → **10/58** named rows (see “Further table-derived analyses §G”).
+- **Status**: co-occurrence is table-backed; “flat dark = genre” is **[Hypothesis]**.
+
+### Insight 14 (gradient-led color is cross-bucket)
+
+- **[Table]**: `colorStrategy=gradientLed` → **7/58** across four `collectionBucket` values (see “Further table-derived analyses §F”).
+- **Status**: table-backed; strategic interpretation is **[Hypothesis]**.

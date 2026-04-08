@@ -16,7 +16,7 @@
 <div align="center">
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-![DESIGN.md Count](https://img.shields.io/badge/DESIGN.md%20count-55-10b981?style=classic)
+![DESIGN.md Count](https://img.shields.io/badge/DESIGN.md%20count-58-10b981?style=classic)
 [![Last Update](https://img.shields.io/github/last-commit/VoltAgent/awesome-design-md?label=Last%20update&style=classic)](https://github.com/VoltAgent/awesome-design-md)
 [![Discord](https://img.shields.io/discord/1361559153780195478.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://s.voltagent.dev/discord)
 
@@ -85,8 +85,8 @@ This repo includes a **quantitative and narrative analysis** of the collection: 
 
 **Data (source of truth for the table)**
 
-- [`analysis/features.json`](analysis/features.json) — one row per company (54 in the current snapshot): enums such as `collectionBucket` (README **Collection** section), `themeMode`, `shapeLanguage`, `shadowStyle`, `contentFocus`, `primaryIntent`, plus notes.
-- [`analysis/clusters.csv`](analysis/clusters.csv) — KMeans clusters on one-hot encoded enum features (exploratory; the companion doc treats rule-based `collectionBucket` slices—the README Collection sections—as the primary segmentation).
+- [`analysis/features.json`](analysis/features.json) — one row per company (58 in the current snapshot): enums such as `collectionBucket` (README **Collection** sections plus **Automotive & Mobility** for OEM sites), `themeMode`, `shapeLanguage`, `shadowStyle`, `contentFocus`, `primaryIntent`, plus notes.
+- [`analysis/clusters.csv`](analysis/clusters.csv) — KMeans clusters on one-hot encoded enum features (exploratory; the companion doc treats rule-based `collectionBucket` slices—README Collection sections plus `automotiveAndMobility`—as the primary segmentation).
 
 **Big levers** (called out in both docs): mood (`themeMode`), geometry (`shapeLanguage`), depth language (`shadowStyle`), and payload (`contentFocus`).
 
@@ -162,6 +162,14 @@ Then visit `http://localhost:8000/reference-finder/`.
 - [**Pinterest**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/pinterest/) - Visual discovery platform. Red accent, masonry grid, image-first
 - [**Webflow**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/webflow/) - Visual web builder. Blue-accented, polished marketing site aesthetic
 
+### Automotive & Mobility
+
+- [**BMW**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/bmw/) - Luxury automotive. Dual dark/light rhythm, BMWTypeNextLatin, zero-radius precision
+- [**Ferrari**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/ferrari/) - Sports cars. Chiaroscuro editorial layout, Rosso Corsa accents, FerrariSans
+- [**Lamborghini**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/lamborghini/) - Super sports cars. True-black canvas, LamboType, gold CTAs, video-led heroes
+- [**Renault**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/renault/) - Mass-market EV focus. NouvelR geometry, aurora hero gradients, yellow super-primary CTAs
+- [**Tesla**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/tesla/) - EV manufacturer. Radical minimal UI, Universal Sans, photography-first white canvas
+
 ### Fintech & Crypto
 
 - [**Coinbase**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/coinbase/) - Crypto exchange. Clean blue identity, trust-focused, institutional feel
@@ -173,7 +181,6 @@ Then visit `http://localhost:8000/reference-finder/`.
 
 - [**Airbnb**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/airbnb/) - Travel marketplace. Warm coral accent, photography-driven, rounded UI
 - [**Apple**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/apple/) - Consumer electronics. Premium white space, SF Pro, cinematic imagery
-- [**BMW**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/bmw/) - Luxury automotive. Dark premium surfaces, precise German engineering aesthetic
 - [**IBM**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/ibm/) - Enterprise technology. Carbon design system, structured blue palette
 - [**NVIDIA**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/nvidia/) - GPU computing. Green-black energy, technical power aesthetic
 - [**SpaceX**](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/spacex/) - Space technology. Stark black and white, full-bleed imagery, futuristic

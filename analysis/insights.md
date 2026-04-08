@@ -9,7 +9,7 @@ Rules:
 ### <insight title>
 
 - **Filter**: `...`
-- **Count**: `N / 54`
+- **Count**: `N / 58`
 - **Examples**: `...`
 - **Counterexamples** (optional): `...`
 - **Claim**: ...

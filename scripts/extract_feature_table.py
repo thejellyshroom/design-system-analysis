@@ -39,6 +39,7 @@ _INFRA = 'infrastructureAndCloud'
 _DESIGN = 'designAndProductivity'
 _FINTECH = 'fintechAndCrypto'
 _ENT = 'enterpriseAndConsumer'
+_AUTO = 'automotiveAndMobility'
 
 README_COLLECTION_BUCKET_BY_SLUG: dict[str, str] = {
     'claude': _AI, 'cohere': _AI, 'elevenlabs': _AI, 'minimax': _AI, 'mistral.ai': _AI,
@@ -52,7 +53,8 @@ README_COLLECTION_BUCKET_BY_SLUG: dict[str, str] = {
     'airtable': _DESIGN, 'cal': _DESIGN, 'clay': _DESIGN, 'figma': _DESIGN, 'framer': _DESIGN,
     'intercom': _DESIGN, 'miro': _DESIGN, 'notion': _DESIGN, 'pinterest': _DESIGN, 'webflow': _DESIGN,
     'coinbase': _FINTECH, 'kraken': _FINTECH, 'revolut': _FINTECH, 'wise': _FINTECH,
-    'airbnb': _ENT, 'apple': _ENT, 'bmw': _ENT, 'ibm': _ENT, 'nvidia': _ENT, 'spacex': _ENT,
+    'airbnb': _ENT, 'apple': _ENT, 'ibm': _ENT, 'nvidia': _ENT, 'spacex': _ENT,
+    'bmw': _AUTO, 'ferrari': _AUTO, 'lamborghini': _AUTO, 'renault': _AUTO, 'tesla': _AUTO,
     'spotify': _ENT, 'uber': _ENT,
 }
 

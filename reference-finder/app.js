@@ -22,6 +22,7 @@ const INTENT_BUCKET = {
 /** Display titles for `features.collectionBucket` */
 const COLLECTION_BUCKET_LABEL = {
   aiAndMachineLearning: 'AI & Machine Learning',
+  automotiveAndMobility: 'Automotive & Mobility',
   developerToolsAndPlatforms: 'Developer Tools & Platforms',
   infrastructureAndCloud: 'Infrastructure & Cloud',
   designAndProductivity: 'Design & Productivity',
@@ -100,16 +101,6 @@ function toNumber (v, fallback) {
   return Number.isFinite(n) ? n : fallback
 }
 
-function normalizeWeights (wHard, wVibe, wText) {
-  const sum = wHard + wVibe + wText
-  if (sum <= 0) return { wHard: 0.7, wVibe: 0.2, wText: 0.1 }
-  return {
-    wHard: wHard / sum,
-    wVibe: wVibe / sum,
-    wText: wText / sum
-  }
-}
-
 function normalizeIntentWeights (trust, exploration, emotional) {
   const t = clamp(toNumber(trust, 0), 0, 100)
   const e = clamp(toNumber(exploration, 0), 0, 100)
@@ -155,6 +146,64 @@ function computeIntentMatch (primaryIntent, intentWeights) {
   return intentWeights[bucket] ?? 0
 }
 
+/** How strongly row features read as “trust / clarity” (0–1). */
+function dimTrustSignals (f) {
+  let s = 0
+  if (f.primaryIntent === 'trust') s += 0.38
+  else if (f.primaryIntent === 'unknown') s += 0.1
+  if (f.contentFocus === 'productScreenshots') s += 0.14
+  if (f.contentFocus === 'mixed') s += 0.07
+  if (f.themeMode === 'lightFirst') s += 0.1
+  if (f.themeMode === 'dual') s += 0.05
+  if (f.layoutDensity === 'balanced') s += 0.08
+  if (f.layoutDensity === 'dense') s += 0.04
+  if (f.surfaceDepth === 'flat') s += 0.08
+  if (f.surfaceDepth === 'subtle') s += 0.05
+  if (f.typographyTone === 'neutral') s += 0.06
+  return Math.min(1, s / 0.82)
+}
+
+/** How strongly row features read as “browse / discover” (0–1). */
+function dimExplorationSignals (f) {
+  let s = 0
+  if (f.primaryIntent === 'exploration') s += 0.4
+  if (f.uxMode === 'browsingHeavy') s += 0.22
+  if (f.contentFocus === 'photography') s += 0.18
+  if (f.contentFocus === 'illustration') s += 0.1
+  if (f.themeMode === 'lightFirst') s += 0.08
+  if (f.imageryUsage === 'imageFirst') s += 0.1
+  return Math.min(1, s / 0.75)
+}
+
+/** How strongly row features read as “brand / emotion” (0–1). */
+function dimEmotionalSignals (f) {
+  let s = 0
+  if (f.primaryIntent === 'emotionalBranding') s += 0.42
+  if (f.contentFocus === 'illustration') s += 0.18
+  if (f.colorStrategy === 'gradientLed') s += 0.14
+  if (f.colorStrategy === 'multiAccent') s += 0.1
+  if (f.typographyTone === 'expressive') s += 0.14
+  if (f.typographyTone === 'premium') s += 0.1
+  return Math.min(1, s / 0.78)
+}
+
+function computeIntentFeatureAlignment (f, intentWeights) {
+  const t = dimTrustSignals(f)
+  const e = dimExplorationSignals(f)
+  const m = dimEmotionalSignals(f)
+  return clamp(
+    intentWeights.trust * t + intentWeights.exploration * e + intentWeights.emotional * m,
+    0,
+    1
+  )
+}
+
+function computeIntentBlend (f, intentWeights) {
+  const align = computeIntentFeatureAlignment(f, intentWeights)
+  const legacy = computeIntentMatch(f?.primaryIntent || 'unknown', intentWeights)
+  return 0.62 * align + 0.38 * legacy
+}
+
 function computeTextMatch (query, row) {
   const q = String(query || '').trim().toLowerCase()
   if (!q) return 0
@@ -164,23 +213,31 @@ function computeTextMatch (query, row) {
     ? `${bucket} ${COLLECTION_BUCKET_LABEL[bucket] || ''}`
     : ''
 
-  const hay = [
+  const feats = row?.features || {}
+  const enumHay = Object.values(feats).filter(v => typeof v === 'string').join(' ')
+
+  const raw = [
     row?.company?.name,
     row?.company?.slug,
     row?.source?.designMdPath,
     bucketSearchLine,
+    enumHay,
     row?.notes
   ]
     .filter(Boolean)
     .join('\n')
     .toLowerCase()
 
-  const terms = q.split(/\s+/).filter(Boolean).slice(0, 8)
+  const terms = q.split(/\s+/).filter(Boolean).slice(0, 12)
   if (terms.length === 0) return 0
+
+  const hayWords = new Set(
+    raw.split(/[^a-z0-9.]+/i).filter(w => w.length > 1)
+  )
 
   let hits = 0
   for (const t of terms) {
-    if (hay.includes(t)) hits += 1
+    if (hayWords.has(t) || raw.includes(t)) hits += 1
   }
   return hits / terms.length
 }
@@ -518,13 +575,7 @@ async function discoverPreviews (folder) {
 
 function buildScoreTooltip (score, parts, primaryIntentReadable) {
   const total = (score * 100).toFixed(0)
-  const filterPct = (parts.hard.score * 100).toFixed(0)
-  const goalPct = (parts.intent * 100).toFixed(0)
-  const keywordPct = (parts.text * 100).toFixed(0)
-  return (
-    `Match score ${total} (0–100). Higher = closer to what you asked for. ` +
-    `For ordering only—not a grade of design quality.`
-  )
+  return `Closeness score: ${total} (0–100). For ordering only—not a quality judgment.`
 }
 
 function renderCard ({ row, score, parts, selected }) {
@@ -553,9 +604,12 @@ function renderCard ({ row, score, parts, selected }) {
     )
   }
 
+  const filterWhy = Object.keys(selected).length > 0
+    ? `<strong>Filters</strong> all selected match`
+    : `<strong>Filters</strong> not restricting (any)`
   const why = [
-    `<strong>Filters</strong> ${(parts.hard.score * 100).toFixed(0)}% match`,
-    `<strong>Goals</strong> ${(parts.intent * 100).toFixed(0)}% (${escapeHtml(prettyPrimaryIntent(f.primaryIntent || 'unknown'))})`,
+    filterWhy,
+    `<strong>Goals</strong> ${(parts.intent * 100).toFixed(0)}% vs your sliders (${escapeHtml(prettyPrimaryIntent(f.primaryIntent || 'unknown'))})`,
     `<strong>Keywords</strong> ${(parts.text * 100).toFixed(0)}%`
   ].join(' · ')
 
@@ -617,31 +671,53 @@ function renderCard ({ row, score, parts, selected }) {
 function computeRanking ({ rows, state }) {
   const selected = buildSelectedFilters(state)
   const intentWeights = normalizeIntentWeights(state.iTrust, state.iExploration, state.iEmotional)
-
-  const weights = normalizeWeights(
-    toNumber(state.wHard, 70),
-    toNumber(state.wVibe, 20),
-    toNumber(state.wText, 10)
-  )
+  const strictFilters = Object.keys(selected).length > 0
+  const queryHasText = String(state.query || '').trim().length > 0
 
   const ranked = []
   for (const row of rows) {
     const f = row?.features || {}
     const hard = computeHardMatch(f, selected)
-    const intent = computeIntentMatch(f?.primaryIntent || 'unknown', intentWeights)
+    if (strictFilters && hard.misses.length > 0) continue
+
+    const intent = computeIntentBlend(f, intentWeights)
     const text = computeTextMatch(state.query, row)
 
-    const score = (weights.wHard * hard.score) + (weights.wVibe * intent) + (weights.wText * text)
+    let score
+    if (strictFilters) {
+      // Everyone here matches every filter—spread comes from goals + search.
+      const tw = queryHasText ? 0.38 : 0.52
+      const iw = 1 - tw
+      score = iw * intent + tw * text
+    } else {
+      const tw = queryHasText ? 0.32 : 0.08
+      const iw = 1 - tw
+      score = iw * intent + tw * text
+    }
 
     ranked.push({
       row,
       score,
-      parts: { hard, intent, text }
+      parts: {
+        hard,
+        intent,
+        text,
+        strictFilters
+      }
     })
   }
 
-  ranked.sort((a, b) => b.score - a.score)
-  return { ranked, selected, weights, intentWeights }
+  ranked.sort((a, b) => {
+    const d = b.score - a.score
+    if (Math.abs(d) > 1e-9) return d > 0 ? 1 : -1
+    const na = (a.row?.company?.name || a.row?.company?.slug || '').localeCompare(
+      b.row?.company?.name || b.row?.company?.slug || '',
+      undefined,
+      { sensitivity: 'base' }
+    )
+    return na
+  })
+  return { ranked, selected, intentWeights }
 }
 
 function bind () {
@@ -656,7 +732,6 @@ function bind () {
     dataStatus: document.getElementById('dataStatus'),
     resetBtn: document.getElementById('resetBtn'),
     updateStatus: document.getElementById('updateStatus'),
-    presetChips: document.getElementById('presetChips'),
     intentPresets: document.getElementById('intentPresets')
   }
 
@@ -734,71 +809,6 @@ function wire (els, rows) {
     intentRaw.emotional = 33
   }
 
-  const applyPreset = (preset) => {
-    if (preset === 'devtools-docs' || preset === 'developer-tools-platforms') {
-      els.collectionBucket.value = 'developerToolsAndPlatforms'
-      els.contentFocus.value = 'codeFirst'
-      els.layoutDensity.value = 'dense'
-      els.themeMode.value = 'dual'
-      setIntentPreset('trust')
-      els.query.value = 'docs code api developer'
-      return
-    }
-    if (preset === 'ai-machine-learning') {
-      els.collectionBucket.value = 'aiAndMachineLearning'
-      els.contentFocus.value = 'mixed'
-      els.layoutDensity.value = 'balanced'
-      els.themeMode.value = 'any'
-      setIntentPreset('balanced')
-      els.query.value = 'llm model inference api agent'
-      return
-    }
-    if (preset === 'infrastructure-cloud') {
-      els.collectionBucket.value = 'infrastructureAndCloud'
-      els.contentFocus.value = 'codeFirst'
-      els.layoutDensity.value = 'dense'
-      els.themeMode.value = 'darkFirst'
-      setIntentPreset('trust')
-      els.query.value = 'cloud database infrastructure api'
-      return
-    }
-    if (preset === 'fintech-crypto') {
-      els.collectionBucket.value = 'fintechAndCrypto'
-      els.contentFocus.value = 'productScreenshots'
-      els.layoutDensity.value = 'balanced'
-      els.themeMode.value = 'any'
-      setIntentPreset('trust')
-      els.query.value = 'banking money payment wallet'
-      return
-    }
-    if (preset === 'design-productivity') {
-      els.collectionBucket.value = 'designAndProductivity'
-      els.layoutDensity.value = 'dense'
-      els.contentFocus.value = 'productScreenshots'
-      els.themeMode.value = 'dual'
-      setIntentPreset('trust')
-      els.query.value = 'dashboard workspace canvas'
-      return
-    }
-    if (preset === 'marketplace-browse') {
-      els.collectionBucket.value = 'enterpriseAndConsumer'
-      els.layoutDensity.value = 'balanced'
-      els.contentFocus.value = 'photography'
-      els.themeMode.value = 'lightFirst'
-      setIntentPreset('exploration')
-      els.query.value = 'browse grid search'
-      return
-    }
-    if (preset === 'brand-emotional') {
-      els.collectionBucket.value = 'enterpriseAndConsumer'
-      els.layoutDensity.value = 'sparse'
-      els.contentFocus.value = 'mixed'
-      els.themeMode.value = 'lightFirst'
-      setIntentPreset('emotional')
-      els.query.value = 'marketing story brand'
-    }
-  }
-
   const setUpdated = () => {
     lastRenderAt = Date.now()
     els.updateStatus.innerHTML = `<span class="pulse isActive"><span class="pulseDot"></span><span>Refreshed</span></span>`
@@ -830,7 +840,6 @@ function wire (els, rows) {
           const toolbar = hasBoth
             ? `
             <div class="previewToolbar">
-              <span class="previewToolbarLabel">Sample</span>
               <div class="previewThemeSeg" role="group" aria-label="Light or dark sample">
                 <button type="button" class="previewThemeBtn isActive" data-preview-theme="light" aria-pressed="true">Light</button>
                 <button type="button" class="previewThemeBtn" data-preview-theme="dark" aria-pressed="false">Dark</button>
@@ -868,6 +877,21 @@ function wire (els, rows) {
     const state = readState(els, intentRaw)
     const { ranked, selected } = computeRanking({ rows, state })
     els.matchCount.textContent = String(ranked.length)
+
+    if (ranked.length === 0) {
+      els.resultsList.innerHTML = `
+      <div class="card cardCalm">
+        <div class="cardTop">
+          <h3 class="cardTitle">No matches</h3>
+        </div>
+        <div class="notes whyFlush">
+          Every selected filter must match a system. Loosen one or more filters (choose “Any”) or clear the search box, then try again.
+        </div>
+      </div>`
+      syncGoalChips(els.intentPresets, activeGoal)
+      setUpdated()
+      return
+    }
 
     els.resultsList.innerHTML = ranked.slice(0, 24).map(item => {
       return renderCard({
@@ -912,13 +936,6 @@ function wire (els, rows) {
 
   const filterPanel = document.querySelector('.panel.rail')
   attachCustomFilterHandlers(filterPanel, render)
-  els.presetChips.addEventListener('click', (e) => {
-    const btn = e.target?.closest?.('[data-preset]')
-    if (!btn) return
-    applyPreset(btn.getAttribute('data-preset'))
-    render()
-  })
-
   els.intentPresets.addEventListener('click', (e) => {
     const btn = e.target?.closest?.('[data-intent]')
     if (!btn) return
@@ -997,6 +1014,7 @@ async function main () {
       options: buckets,
       preferredOrder: [
         'aiAndMachineLearning',
+        'automotiveAndMobility',
         'developerToolsAndPlatforms',
         'infrastructureAndCloud',
         'designAndProductivity',

@@ -91,21 +91,21 @@
       },
       "features": {
         "productType": "physical",
-        "collectionBucket": "enterpriseAndConsumer",
+        "collectionBucket": "automotiveAndMobility",
         "uxMode": "browsingHeavy",
         "imageryUsage": "imageFirst",
         "colorStrategy": "singleAccent",
         "typographyTone": "technical",
-        "layoutDensity": "dense",
+        "layoutDensity": "balanced",
         "surfaceDepth": "flat",
-        "themeMode": "darkFirst",
+        "themeMode": "dual",
         "shapeLanguage": "sharp",
         "shadowStyle": "none",
         "contentFocus": "photography",
         "motionUsage": "low",
         "primaryIntent": "trust"
       },
-      "notes": "BMW's design system exudes precision and performance, with a dark-first theme that emphasizes sharp, angular shapes. The color strategy is single accent, utilizing BMW Blue sparingly for interactive elements. Typography is technical, featuring the proprietary BMWTypeNextLatin typeface, which maintains a dense layout with tight line-heights. The overall vibe is that of a luxury automotive showroom, with full-bleed photography creating a cinematic experience. Content is presented primarily through striking automotive photography, enhancing the brand's identity. The absence of shadows and the use of flat surfaces contribute to a clean, modern aesthetic, while the sharp corners reinforce the industrial design ethos. This cohesive approach ensures a strong brand presence across all digital touchpoints."
+      "notes": "BMW alternates deep, full-bleed dark hero photography with clean white content bands—dual-mode rhythm like a lit showroom—with BMW Blue (`#1c69d4`) reserved for interactive and focus states only. BMWTypeNextLatin drives everything: whisper-light 300 uppercase display versus 900-weight navigation, with tight line-heights (about 1.15–1.30) and compressed body copy. Zero border-radius, virtually no box-shadows: depth comes from photography and dark/light section contrast, not elevation tokens."
     },
     {
       "company": {
@@ -395,6 +395,32 @@
     },
     {
       "company": {
+        "slug": "ferrari",
+        "name": "Ferrari"
+      },
+      "source": {
+        "designMdPath": "design-md/ferrari/DESIGN.md"
+      },
+      "features": {
+        "productType": "physical",
+        "collectionBucket": "automotiveAndMobility",
+        "uxMode": "browsingHeavy",
+        "imageryUsage": "imageFirst",
+        "colorStrategy": "multiAccent",
+        "typographyTone": "premium",
+        "layoutDensity": "balanced",
+        "surfaceDepth": "flat",
+        "themeMode": "dual",
+        "shapeLanguage": "mixed",
+        "shadowStyle": "subtle",
+        "contentFocus": "photography",
+        "motionUsage": "medium",
+        "primaryIntent": "emotionalBranding"
+      },
+      "notes": "Ferrari reads as a digital editorial: chiaroscuro between absolute black cinematic blocks and white editorial panels; Rosso Corsa is sparse but heritage yellows, link blues, and semantic greens/blues exist in tokens. FerrariSans plus uppercase Body-Font labels form a two-register magazine hierarchy; default controls sit at about 2px radius while dialogs and circular carousel dots deviate. Elevation is almost flat—photography carries depth—with only a whisper of shadow in utilitarian overlays (e.g. consent). Carousel heroes and auto-advance motion support an emotional, gallery-like browse."
+    },
+    {
+      "company": {
         "slug": "framer",
         "name": "Framer"
       },
@@ -522,6 +548,32 @@
         "primaryIntent": "trust"
       },
       "notes": "Kraken's design exudes a clean and trustworthy vibe, primarily utilizing a light theme with white backgrounds and a striking purple color palette. The use of rounded shapes, particularly in buttons, adds a friendly touch while maintaining professionalism. Typography is technical, featuring a dual font system that balances display and UI needs effectively. The layout is balanced, ensuring content is presented clearly without overwhelming the user. Subtle shadows enhance depth without being intrusive. Imagery is mixed, incorporating product screenshots to showcase functionality, aligning with the overall goal of building trust. The design's multi-accent color strategy allows for visual interest while maintaining brand consistency."
+    },
+    {
+      "company": {
+        "slug": "lamborghini",
+        "name": "Lamborghini"
+      },
+      "source": {
+        "designMdPath": "design-md/lamborghini/DESIGN.md"
+      },
+      "features": {
+        "productType": "physical",
+        "collectionBucket": "automotiveAndMobility",
+        "uxMode": "browsingHeavy",
+        "imageryUsage": "imageFirst",
+        "colorStrategy": "multiAccent",
+        "typographyTone": "expressive",
+        "layoutDensity": "balanced",
+        "surfaceDepth": "layered",
+        "themeMode": "darkFirst",
+        "shapeLanguage": "mixed",
+        "shadowStyle": "none",
+        "contentFocus": "mixed",
+        "motionUsage": "medium",
+        "primaryIntent": "emotionalBranding"
+      },
+      "notes": "Lamborghini centers on absolute black (`#000000`) with white type; gold is the signature CTA chroma but cyan, link blue, and teal hover states appear for UI feedback. LamboType at extreme uppercase scales with tight line-heights drives an aggressive voice; hexagonal UI motifs echo the type DNA. Depth is layered charcoal steps (`#181818`, `#202020`) on the black canvas—not drop-shadow stacks. Full-viewport video heroes dominate alongside studio vehicle stills; controls are mostly zero-radius with rare rounded switches (~20px) and small badge radii."
     },
     {
       "company": {
@@ -915,6 +967,32 @@
     },
     {
       "company": {
+        "slug": "renault",
+        "name": "Renault"
+      },
+      "source": {
+        "designMdPath": "design-md/renault/DESIGN.md"
+      },
+      "features": {
+        "productType": "physical",
+        "collectionBucket": "automotiveAndMobility",
+        "uxMode": "browsingHeavy",
+        "imageryUsage": "imageFirst",
+        "colorStrategy": "gradientLed",
+        "typographyTone": "neutral",
+        "layoutDensity": "balanced",
+        "surfaceDepth": "layered",
+        "themeMode": "dual",
+        "shapeLanguage": "mixed",
+        "shadowStyle": "stacked",
+        "contentFocus": "photography",
+        "motionUsage": "medium",
+        "primaryIntent": "exploration"
+      },
+      "notes": "Renault contrasts disciplined NouvelR geometry (bold headings, very tight display line-heights) with vivid hero backdrops: aurora-like gradients and full-bleed vehicle photography. PromoCards use a top dark gradient overlay for legibility and alternate light/dark (`is-alternative-mode`) in a chessboard cadence—true dual theme. Yellow marks super-primary CTAs; black/white binary buttons stay zero-radius, while search and chips use full pill radii (~46–50px). The doc describes a multi-level shadow system (hover lifts through deep panel stacks), not a flat Tesla-like surface."
+    },
+    {
+      "company": {
         "slug": "resend",
         "name": "Resend"
       },
@@ -1172,6 +1250,32 @@
         "primaryIntent": "trust"
       },
       "notes": "Superhuman's design exudes a premium, luxury vibe with a predominantly white canvas and a striking purple gradient hero. The color strategy is centered around a single accent, 'Lavender Glow,' against a clean backdrop, creating a sophisticated atmosphere. Typography is handled with a custom variable font, 'Super Sans VF,' which employs unconventional weights for a unique feel. The layout is balanced, ensuring readability while maintaining a sense of spaciousness. The theme is light-first, with rounded shapes that soften the overall presentation. Content is primarily showcased through product screenshots, emphasizing the UI's elegance and functionality without unnecessary decoration. Overall, the design communicates confidence and clarity, inviting users to engage with the product seamlessly."
+    },
+    {
+      "company": {
+        "slug": "tesla",
+        "name": "Tesla"
+      },
+      "source": {
+        "designMdPath": "design-md/tesla/DESIGN.md"
+      },
+      "features": {
+        "productType": "physical",
+        "collectionBucket": "automotiveAndMobility",
+        "uxMode": "browsingHeavy",
+        "imageryUsage": "imageFirst",
+        "colorStrategy": "singleAccent",
+        "typographyTone": "neutral",
+        "layoutDensity": "sparse",
+        "surfaceDepth": "flat",
+        "themeMode": "lightFirst",
+        "shapeLanguage": "mixed",
+        "shadowStyle": "none",
+        "contentFocus": "photography",
+        "motionUsage": "medium",
+        "primaryIntent": "trust"
+      },
+      "notes": "Tesla is radical subtraction: viewport-tall photography carries emotion while chrome stays white, flat, and almost free of decoration—Electric Blue (`#3E6AE1`) alone signals primary actions. Universal Sans Display vs Text keeps typography restrained (weights 400–500, default letter-spacing). Interactive elements use about 4px radius; larger category image tiles use roughly 12px—so geometry is mixed, not uniformly sharp. Primary UI avoids box-shadows; depth comes from layering, frosted nav opacity, and imagery. Carousels and 0.33s transitions keep motion moderate and consistent."
     },
     {
       "company": {

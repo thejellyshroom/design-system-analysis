@@ -1,6 +1,6 @@
 ## Design System Feature-Table Analysis (v1 → robust companion)
 
-Source of truth: `analysis/features.json` (54 companies, enums + notes).  
+Source of truth: `analysis/features.json` (58 companies, enums + notes).  
 Clustering: `analysis/clusters.csv` (KMeans over one-hot encoded enum features; constant columns dropped).
 
 This document is intentionally derived **only** from the feature table (not from any prior narrative analysis).
@@ -37,33 +37,35 @@ If you want to extend the table later, the most valuable upgrades are usually: t
 
 ### Feature distributions (high-signal)
 
-- **productType**: overwhelmingly `digital` (50/54); with `physical` (2), and singletons `marketplace` (1) and `mixed` (1).  
-  Implication: most comparative claims will be about *types of digital products*, not physical vs digital.
+- **productType**: overwhelmingly `digital` (51/58); `physical` (6: Apple plus five automotive OEMs), and `marketplace` (1).  
+  Implication: most comparative claims will still be about *types of digital products*, but physical/OEM rows are now large enough to compare as a small cohort.
 
-- **`collectionBucket`**: mirrors the repo **README → Collection** headings (one bucket per company; values are camelCase keys in `features.json`). Current distribution (54 companies):
+- **`collectionBucket`**: aligns with the repo **README → Collection** headings **plus** **`automotiveAndMobility`** for car-manufacturer marketing sites (OEMs also appear under **Automotive & Mobility** in the README). One bucket per company; values are camelCase keys in `features.json`. Current distribution (58 companies):
   - `developerToolsAndPlatforms` (14)
   - `aiAndMachineLearning` (12)
   - `designAndProductivity` (10)
-  - `enterpriseAndConsumer` (8)
+  - `enterpriseAndConsumer` (7) — *BMW moved to automotive; see below.*
+  - `automotiveAndMobility` (5): BMW, Ferrari, Lamborghini, Renault, Tesla
   - `infrastructureAndCloud` (6)
   - `fintechAndCrypto` (4) — *Stripe is grouped under Infrastructure & Cloud in the README, not here.*
 
-  Implication: segmentation is **editorial / collection-based**, not a claim about payment vs SaaS TAM. Use `productType` for marketplace vs physical vs digital product shape.
+  Implication: segmentation is **editorial / collection-based** (with a dedicated automotive vertical in data and README). Use `productType` for marketplace vs physical vs digital product shape.
 
 - **At-a-glance: `collectionBucket` distribution (current)**
 
 ```mermaid
 pie showData
-  title collectionBucket (54 companies)
+  title collectionBucket (58 companies)
   "developerToolsAndPlatforms" : 14
   "aiAndMachineLearning" : 12
   "designAndProductivity" : 10
-  "enterpriseAndConsumer" : 8
+  "enterpriseAndConsumer" : 7
+  "automotiveAndMobility" : 5
   "infrastructureAndCloud" : 6
   "fintechAndCrypto" : 4
 ```
 
-- **primaryIntent**: mostly `trust` (39), with `exploration` (8) and `emotionalBranding` (7).  
+- **primaryIntent**: mostly `trust` (40), with `exploration` (9) and `emotionalBranding` (9).  
   Implication: your decision rule is still “trust-seeking.” If you want more variation, tighten the rule for `trust` and/or bias toward `unknown` unless multiple independent cues align.
 
 ---
@@ -74,9 +76,9 @@ This is the layer you can read before any charts or clustering. It’s derived f
 
 ### 1) Physical product brands use the interface to frame a single object
 
-**Companies:** Apple, BMW
+**Companies:** Apple; BMW, Ferrari, Lamborghini, Renault, Tesla
 
-These companies treat the product photo as the centerpiece and keep everything else restrained. The feature table reflects that with `productType=physical` and `contentFocus=photography` for both, plus generally sparse/browsing layouts.
+These companies treat the product photo (and, for some OEMs, cinematic video heroes) as the centerpiece and keep UI chrome restrained. The feature table reflects that with `productType=physical` and mostly `contentFocus=photography`; Lamborghini uses `contentFocus=mixed` to reflect video plus stills.
 
 **What this achieves:** the product becomes the argument. UI components mainly annotate.
 
@@ -86,7 +88,7 @@ These companies treat the product photo as the centerpiece and keep everything e
 
 **Companies (examples):** Vercel, Raycast, Resend, Warp, Cursor, Sentry, Supabase (README: **Developer Tools & Platforms**)
 
-Across the table, `collectionBucket=developerToolsAndPlatforms` is a meaningful bucket (14/54). These products disproportionately show:
+Across the table, `collectionBucket=developerToolsAndPlatforms` is a meaningful bucket (14/58). These products disproportionately show:
 - `contentFocus=codeFirst` or heavy product-screenshot storytelling
 - more `darkFirst` theming than the “average SaaS marketing page”
 - depth expressed through borders/shadows as a system (not just “one card shadow”)
@@ -99,7 +101,7 @@ Across the table, `collectionBucket=developerToolsAndPlatforms` is a meaningful 
 
 **Companies:** too many to list — but it’s the center of gravity.
 
-Most rows land on `primaryIntent=trust` (39/54). In plain language: most of these pages are trying to feel dependable and non-risky. Even when brand choices differ (color, type, mood), the posture tends to converge on clarity and legibility rather than surprise.
+Most rows land on `primaryIntent=trust` (40/58). In plain language: most of these pages are trying to feel dependable and non-risky. Even when brand choices differ (color, type, mood), the posture tends to converge on clarity and legibility rather than surprise.
 
 **What this achieves:** lower perceived risk. The design says “this will work” more than “this will delight.”
 
@@ -132,10 +134,10 @@ flowchart LR
 
 ### 5) “Exploration” and “emotional branding” are real minority strategies here
 
-**Exploration examples:** Airbnb, Figma, Miro, Kraken (by `primaryIntent`, not by collection bucket)  
-**EmotionalBranding examples:** Claude, Clay, Runway
+**Exploration examples:** Airbnb, Figma, Miro, Kraken, Renault (by `primaryIntent`, not by collection bucket)  
+**EmotionalBranding examples:** Claude, Clay, Runway, Ferrari, Lamborghini
 
-These groups are smaller (8/54 and 7/54), but they’re important because they represent brands that prioritize either:
+These groups are smaller (9/58 and 9/58), but they’re important because they represent brands that prioritize either:
 - browsing/discovery (“there’s lots here, go explore”), or
 - world-building (“feel the brand”)
 
@@ -152,7 +154,10 @@ Clustering is useful, but the most defensible segmentation you can do *right now
 - **designAndProductivity (10)**: Airtable, Cal.com, Clay, Figma, Framer, Intercom, Miro, Notion, Pinterest, Webflow  
 - **infrastructureAndCloud (6)**: ClickHouse, Composio, HashiCorp, MongoDB, Sanity, Stripe  
 - **fintechAndCrypto (4)**: Coinbase, Kraken, Revolut, Wise  
-- **enterpriseAndConsumer (8)**: Airbnb, Apple, BMW, IBM, NVIDIA, SpaceX, Spotify, Uber  
+- **enterpriseAndConsumer (7)**: Airbnb, Apple, IBM, NVIDIA, SpaceX, Spotify, Uber  
+- **automotiveAndMobility (5)**: BMW, Ferrari, Lamborghini, Renault, Tesla  
+
+**Automotive segment (table snapshot):** `themeMode` is mixed (`dual` 3, `darkFirst` 1, `lightFirst` 1); `primaryIntent` mixes trust (2), emotionalBranding (2), and exploration (1). Payload is photography-led except Lamborghini (`mixed` for video + stills).
 
 ---
 
@@ -160,7 +165,7 @@ Clustering is useful, but the most defensible segmentation you can do *right now
 
 ### 1) Developer Tools & Platforms overwhelmingly optimize for trust, not emotional branding
 
-In the current table, `collectionBucket=developerToolsAndPlatforms` maps to `primaryIntent=trust` **12/14**.
+In the current table, `collectionBucket=developerToolsAndPlatforms` maps to `primaryIntent=trust` **12/14** (PostHog → exploration; Lovable → emotionalBranding).
 
 **What this suggests:** the dominant developer-tool posture is “reliable instrument panel,” not brand world-building.
 
@@ -192,7 +197,7 @@ For `collectionBucket=designAndProductivity`: `trust` is **6/10**, with 3 explor
 The table shows strong specialization:
 - **developerToolsAndPlatforms**: `codeFirst` **4/14** + `productScreenshots` **4/14** + `mixed` **3/14**  
 - **designAndProductivity**: `productScreenshots` **4/10** + `mixed` **3/10**  
-- **fintechAndCrypto**: `productScreenshots` **2/4** + mixed/code/illustration elsewhere
+- **fintechAndCrypto**: `productScreenshots` **2/4**, `codeFirst` **1/4**, `illustration` **1/4**
 
 **What this suggests:** “code payload vs UI payload vs editorial payload” explains more of the perceived differences than most other single columns.
 
@@ -200,8 +205,8 @@ The table shows strong specialization:
 
 ## Limitations (important)
 
-- **Category imbalance**: with 50/54 `productType=digital`, physical-vs-digital comparisons are underpowered.
-- **Manual categorization risk**: `collectionBucket` is README-aligned by construction; edge cases (e.g. a company that fits two sections) are forced into one bucket.
+- **Category imbalance**: with 51/58 `productType=digital`, physical-vs-digital comparisons are still tilted toward digital, but the six `physical` rows (Apple + five OEMs) support qualitative OEM patterns.
+- **Manual categorization risk**: `collectionBucket` is README- and script-aligned by construction; OEMs use `automotiveAndMobility` even though some also sell software. Edge cases that fit two README sections are forced into one bucket.
 
 ---
 
@@ -216,7 +221,7 @@ Legend:
 
 ### Insight 1 (physical product → photography as interface layer)
 
-- **Primary**: **[Table]** via `productType=physical` rows + their `contentFocus` values (note: \(n=2\), underpowered).
+- **Primary**: **[Table]** via `productType=physical` rows + their `contentFocus` values (note: \(n=6\); mostly photography, one `mixed` for video-heavy OEM).
 - **Secondary**: **[KG]** Apple/BMW quotes in `ANALYSIS.md`.
 - **Caveat**: treat as illustrative pattern, not statistical claim.
 
@@ -261,7 +266,7 @@ Legend:
 ### Insight 9 (illustration/photography payload ⇒ mixed intent)
 
 - **[Table]**: `contentFocus=illustration` distribution is **trust 4 / exploration 3 / emotionalBranding 2**.
-- **[Table]**: `contentFocus=photography` distribution is **trust 2 / exploration 2 / emotionalBranding 3**.
+- **[Table]**: `contentFocus=photography` distribution is **trust 3 / exploration 3 / emotionalBranding 4**.
 - **Status**: table-supported for “mixed intent;” any causal story is **[Hypothesis]**.
 
 ### Insight 10 (Design & Productivity → thin systems as strategy)

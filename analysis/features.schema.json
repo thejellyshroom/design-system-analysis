@@ -17,6 +17,7 @@
       "type": "enum",
       "allowed": [
         "aiAndMachineLearning",
+        "automotiveAndMobility",
         "developerToolsAndPlatforms",
         "infrastructureAndCloud",
         "designAndProductivity",
@@ -24,8 +25,8 @@
         "enterpriseAndConsumer",
         "unknown"
       ],
-      "definition": "README Collection section for this company (same headings as the repo README).",
-      "decisionRule": "Assign exactly one bucket per company using the README Collection groupings (AI & Machine Learning; Developer Tools & Platforms; Infrastructure & Cloud; Design & Productivity; Fintech & Crypto; Enterprise & Consumer). Stripe is listed under Infrastructure & Cloud in the README. New companies should be added to README + `scripts/extract_feature_table.py` README_COLLECTION_BUCKET_BY_SLUG; use unknown only as a temporary placeholder."
+      "definition": "High-level product vertical for grouping in tools and analysis (README Collection buckets plus automotive OEMs).",
+      "decisionRule": "Use automotiveAndMobility for car manufacturers and mobility OEM marketing sites in this dataset. Otherwise assign one README Collection bucket (AI & Machine Learning; Developer Tools & Platforms; Infrastructure & Cloud; Design & Productivity; Fintech & Crypto; Enterprise & Consumer). Stripe is Infrastructure & Cloud in the README. New slugs: add to `scripts/extract_feature_table.py` README_COLLECTION_BUCKET_BY_SLUG; use unknown only as a temporary placeholder."
     },
     {
       "key": "uxMode",

@@ -532,10 +532,6 @@ details.disclosure[open] > .disclosureSummary::before {
   gap: var(--space-2);
 }
 
-.chipsPresets {
-  gap: var(--space-2);
-}
-
 .chipBtn {
   appearance: none;
   border: 0;

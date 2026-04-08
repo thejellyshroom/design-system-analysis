@@ -1,9 +1,9 @@
-## Design System Analysis: Patterns Across 54 Companies
+## Design System Analysis: Patterns Across 58 Companies
 
 Public synthesis of cross-company design-system patterns, intended for **designers** and **engineers** who want a fast, evidence-grounded vocabulary for “why does this feel like *that*?”
 
 - **Companion (methods + evidence)**: `analysis/ANALYSIS_FEATURE_TABLE.md`
-- **Data**: `analysis/features.json` (manual enums + notes, 54 companies)
+- **Data**: `analysis/features.json` (manual enums + notes, 58 companies)
 - **Extra context**: LightRAG knowledge graph (KG) extracted from design-system source material
 
 ### Why this exists (design systems aren’t just UI)
@@ -34,38 +34,38 @@ Each insight uses one or more evidence types:
 
 ### 1) Physical product companies use photography as their primary interface layer
 
-**Companies: Apple, BMW**
+**Companies: Apple; automotive OEMs in the dataset (BMW, Ferrari, Lamborghini, Renault, Tesla)**
 
-Physical product companies treat the product photograph not as decoration but as the primary communicative element of the interface. Their layout systems are designed around the photo — full-width hero photography, content centered below the image, spacing that gives the image room to breathe. The grid exists to frame the photograph, not the other way around.
+Physical product companies treat the product photograph (and, on some automotive sites, full-viewport video) not as decoration but as the primary communicative element of the interface. Layout systems are built around the vehicle or device — full-width hero photography, content centered below the image, spacing that gives the product room to breathe. The grid exists to frame the product, not the other way around.
 
-This is distinct from consumer marketplaces (Airbnb, Pinterest), which also use photography heavily but as *content* — listings, pins, things to browse. Physical product photography is singular and curated; marketplace photography is plural and user-generated.
+This is distinct from consumer marketplaces (Airbnb, Pinterest), which also use photography heavily but as *content* — listings, pins, things to browse. Physical product imagery is singular and curated; marketplace photography is plural and user-generated.
 
 > *[Apple → Layout Principles] "full-width hero photography, centered content sections"*
 > *[Apple → Apple's Website] "product-as-hero photography, proprietary typography, centered full-width layouts"*
 > *[BMW → Image Treatment] "brand imagery, automotive aesthetic, visual identity, photography"*
 
-**What this achieves:** The product becomes the argument. No copy needed to establish desirability — the photograph makes the case. Typography's job is to annotate, not to persuade.
+**What this achieves:** The product becomes the argument. No copy needed to establish desirability — the photograph (or cinematic hero) makes the case. Typography's job is to annotate, not to persuade.
 
 - **Evidence**:
-  - **[Table]**: `productType=physical` rows concentrate on `contentFocus=photography` (see companion overview + limitations).
-  - **[KG]**: Apple/BMW snippets above.
+  - **[Table]**: `productType=physical` is now six rows; most use `contentFocus=photography`, with Lamborghini tagged `mixed` to reflect video-led heroes plus stills (see companion).
+  - **[KG]**: Apple/BMW snippets above; other OEMs are documented similarly in their `DESIGN.md` files.
 
 ---
 
 ### 2) Physical product companies treat custom typefaces as hardware assets, not software choices
 
-**Companies: Apple (San Francisco), BMW (BMW Type)**
+**Companies: Apple (San Francisco); BMW, Ferrari, Lamborghini, Renault, Tesla (each with proprietary or custom-tuned families in their `DESIGN.md`)**
 
-Both Apple and BMW commissioned proprietary typefaces. This is not just about aesthetics — it is vertical integration of brand identity. A proprietary typeface cannot be used by a competitor, and it creates a “visual monopoly” on a specific feeling.
+Apple and the automotive OEMs in this collection lean heavily on proprietary or brand-exclusive type (e.g. BMWTypeNextLatin, FerrariSans, LamboType, NouvelR, Universal Sans). This is not just about aesthetics — it is vertical integration of brand identity. A proprietary typeface cannot be used by a competitor, and it creates a “visual monopoly” on a specific feeling.
 
-Notably, both typefaces are engineered for legibility at small sizes on screen *and* in physical contexts (instrument panels, product labels, packaging). The design brief was not "look distinctive" — it was "work everywhere we exist."
+Notably, these families are engineered for legibility at small sizes on screen *and* in physical or in-vehicle contexts where relevant. The design brief was not only "look distinctive" — it was "work everywhere we exist."
 
 > *[Apple → San Francisco] "San Francisco is Apple's proprietary typeface family referenced as the typographic foundation of the design system"*
 
 **What this achieves:** Brand consistency across touchpoints that no shared font can achieve. If someone sees that letterform, they know who made it. The typeface is a trademark.
 
 - **Evidence**:
-  - **[KG]**: Apple SF reference above. (BMW-typeface specifics are less explicit in the current KG extracts.)
+  - **[KG]**: Apple SF reference above; OEM type systems are spelled out in each brand’s `DESIGN.md`.
   - **[Hypothesis]**: “hardware-asset” framing explains why commissioning is common in physical brands.
 
 ---
@@ -178,7 +178,7 @@ Across the dataset, the *content payload* is one of the cleanest predictors of p
 **What this achieves:** Credibility-by-payload. Showing code is a kind of proof: it reduces ambiguity and tends to read as concrete, technical, and inspectable.
 
 - **Evidence**:
-  - **[Table]**: `contentFocus=codeFirst` maps to `primaryIntent=trust` **13/13** in the current table.
+  - **[Table]**: `contentFocus=codeFirst` maps to `primaryIntent=trust` **13/13** in the current table (58 companies).
 
 ---
 
@@ -190,7 +190,7 @@ When a page leans on **illustration** or **photography**, the intent distributio
 
 - **Evidence**:
   - **[Table]**: `contentFocus=illustration` is intent-mixed (trust 4 / exploration 3 / emotionalBranding 2).
-  - **[Table]**: `contentFocus=photography` is intent-mixed (trust 2 / exploration 2 / emotionalBranding 3).
+  - **[Table]**: `contentFocus=photography` is intent-mixed (trust 3 / exploration 3 / emotionalBranding 4) — automotive rows increased the photography slice.
 
 ---
 
@@ -214,11 +214,11 @@ This could be evidence of less design investment. But it could also be deliberat
 
 ### 11) The “do’s and don’ts” section correlates with brand rigidity requirements
 
-**Companies with prominent Do's/Don'ts sections: Apple, BMW, Vercel, Cursor, Revolut**
+**Companies with prominent Do's/Don'ts sections: Apple, BMW (and other OEM `DESIGN.md` files), Vercel, Cursor, Revolut**
 
 Companies with highly controlled, premium, or compliance-sensitive brand identities all explicitly document what you cannot do with their design system. This pattern is absent from developer tools that encourage forking and customization (Linear, Sentry), and from productivity tools where user customization is the point.
 
-The presence of a Do's/Don'ts section is a signal about who the design system audience is: internal teams and external partners who need hard constraints, not suggestions. BMW and Apple need to control how their brand appears in third-party contexts. Revolut needs to prevent rogue implementations.
+The presence of a Do's/Don'ts section is a signal about who the design system audience is: internal teams and external partners who need hard constraints, not suggestions. Automotive and consumer electronics brands need to control how their identity appears in third-party contexts. Revolut needs to prevent rogue implementations.
 
 > *[BMW → Do's and Don'ts] "brand rules, identity, constraints, governance"*
 > *[Apple → Do's and Don'ts] "design rules, implementation guidance, brand consistency"*
@@ -240,7 +240,7 @@ For distributions, segment cross-tabs, and a claim-by-claim traceability index, 
 
 | Category | Typography | Color | Surface | Primary differentiator |
 |----------|-----------|-------|---------|----------------------|
-| Physical product | Custom/proprietary | Minimal, neutral + product accent | Photography-first, depth as product metaphor | Photography as argument |
+| Physical product / OEM | Custom/proprietary | Minimal, neutral + brand accent | Photography-first (often dual or dark-first for cars) | Product imagery as argument |
 | Consumer marketplace | Custom | Rich token system, sub-brand colors | Card-heavy, layered elevation | Sub-brand color architecture |
 | Fintech | Custom (typography-led) | 1-2 brand colors, neutral everything else | Flat, border-defined | Typography + flatness = trust |
 | Developer tools | Monospace as identity | Near-monochrome + neon accent | Dark, information-dense | Monochrome + density = credibility |
